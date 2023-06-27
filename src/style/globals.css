@@ -4,11 +4,21 @@
 
 @layer base {
   :root {
-    --background: hsl(360, 100%, 100%);
+    --background: hsl(0, 0%, 98%);
     --foreground: hsl(0, 100%, 0%);
 
     --primary: hsl(7, 89%, 52%);
-    --primary-foreground: hsl(7, 89%, 90%);
+    --primary-foreground: hsl(0, 0%, 98%);
+
+    --secondary: hsl(9, 91%, 77%);
+    --secondary-foreground: hsl(0, 0%, 2%);
+
+    --destructive: hsl(22, 92%, 46%);
+    --destructive-foreground: hsl(0, 0%, 98%);
+
+    --border: hsl(240, 5.9%, 90%);
+    --input: hsl(240, 5.9%, 90%);
+    --ring: hsl(240, 5%, 64.9%);
 
     --radius: 0.5rem;
   }
@@ -18,7 +28,7 @@
 
 @layer base {
   * {
-    @apply box-border;
+    @apply box-border border-border;
   }
 
   body {
