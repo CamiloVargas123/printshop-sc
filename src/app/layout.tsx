@@ -1,6 +1,6 @@
 import '@/style/globals.css'
 import { fontMono, fontSans } from '@/lib/fonts'
-import { className } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { TailwindIndicator } from '@/components/TailwindIndicator'
 import { Metadata } from 'next'
@@ -68,7 +68,7 @@ export default function RootLayout({
     <html lang="es" suppressHydrationWarning>
       <head />
       <body
-        className={className(
+        className={cn(
           "min-h-screen",
           fontSans.variable,
           fontMono.variable
