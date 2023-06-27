@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+  :root {
+    --background: hsl(360, 100%, 100%);
+    --foreground: hsl(0, 100%, 0%);
+
+    --primary: hsl(7, 89%, 52%);
+    --primary-foreground: hsl(7, 89%, 90%);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {}
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
