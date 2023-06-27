@@ -19,3 +19,10 @@ export function unslugify(str: string) {
 export function sortArrayString(arr: string[]) {
   return arr.sort((a, b) => a.localeCompare(b))
 }
+
+export function formatPrice(price: number | string) {
+  return new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "EUR",
+  }).format(Number(price))
+}
