@@ -1,7 +1,6 @@
 import '@/style/globals.css'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { fontMono, fontSans } from '@/lib/fonts'
+import { className } from '@/lib/utils'
 
 export const metadata = {
   title: 'printshop',
@@ -15,7 +14,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <head />
+      <body
+        className={className(
+          "min-h-screen bg-background",
+          fontSans.variable,
+          fontMono.variable
+        )}
+      >
+        {children}
+      </body>
     </html>
   )
 }
