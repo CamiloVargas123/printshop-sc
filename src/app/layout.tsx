@@ -2,6 +2,7 @@ import '@/style/globals.css'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { className } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
+import { TailwindIndicator } from '@/components/tailwind-indicator'
 
 export const metadata = {
   title: 'printshop',
@@ -25,6 +26,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
+          <TailwindIndicator />
         </ThemeProvider>
       </body>
     </html>
