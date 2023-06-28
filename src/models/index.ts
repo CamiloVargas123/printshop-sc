@@ -13,7 +13,7 @@ export interface NavItemWithChildren extends NavItem {
 }
 
 export interface NavItemWithOptionalChildren extends NavItem {
-  items?: NavItemWithChildren[]
+  items?: NavItemWithOptionalChildren[]
 }
 
 export type MainNavItem = NavItemWithOptionalChildren

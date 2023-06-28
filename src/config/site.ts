@@ -19,19 +19,16 @@ export const siteConfig = {
           title: "Productos",
           href: "/productos",
           description: "Productos y servicios disponibles",
-          items: [],
         },
         {
           title: "Contacto",
           href: "/contacto",
           description: "Contacta con nosotros",
-          items: [],
         },
         {
           title: "Blog",
           href: "/blog",
           description: "Blog de noticias y novedades",
-          items: [],
         },
       ],
     },
@@ -40,14 +37,12 @@ export const siteConfig = {
       items: [
         {
           title: "Todo",
-          href: `/categories/${slugify(category.title)}`,
-          items: [],
+          href: `/productos/${slugify(category.title)}`,
         },
         ...category.subcategories.map((subcategory) => ({
           title: subcategory.title,
-          href: `/categoria/${slugify(category.title)}/${subcategory.slug}`,
+          href: `/productos/${slugify(category.title)}/${subcategory.slug}`,
           description: subcategory.description,
-          items: []
         })),
       ],
     })),
