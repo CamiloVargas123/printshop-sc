@@ -1,6 +1,8 @@
 import {
   ShoppingCart,
   Layers,
+  Menu,
+  X,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -10,6 +12,8 @@ export type Icon = LucideIcon
 export const Icons = {
   cart: ShoppingCart,
   logo: Layers,
+  menu: Menu,
+  x: X,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
