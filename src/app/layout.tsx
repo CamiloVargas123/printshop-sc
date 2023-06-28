@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { TailwindIndicator } from '@/components/TailwindIndicator'
 import { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
+import { ReduxProvider } from '@/redux/ReduxProvider'
 
 export const metadata: Metadata = {
   title: {
@@ -74,10 +75,12 @@ export default function RootLayout({
           fontMono.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          {children}
-          <TailwindIndicator />
-        </ThemeProvider>
+        <ReduxProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+            {children}
+            <TailwindIndicator />
+          </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   )
