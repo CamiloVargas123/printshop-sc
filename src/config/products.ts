@@ -6,7 +6,7 @@ interface ProductCategory {
     title: string
     description?: string
     image?: string
-    items?: string[]
+    services?: string[]
     slug: string
   }[]
 }
@@ -18,7 +18,7 @@ export const productCategories: ProductCategory[] = [
       {
         title: "Imprenta",
         description: "Todo tipo de impresiones",
-        items: sortArrayString(["Tarjeta de visita", "Posters", "Adesivos", "Pendon", "Flayers"]),
+        services: sortArrayString(["Tarjeta de visita", "Posters", "Adesivos", "Pendon", "Flayers"]),
         slug: "imprenta",
       },
       {
@@ -49,13 +49,13 @@ export const productCategories: ProductCategory[] = [
       {
         title: "Marketing Digital",
         description: "Marketing digital",
-        items: sortArrayString(["Diseño de logo", "Diseño de pagina web", "Diseño de contenido"]),
+        services: sortArrayString(["Diseño de logo", "Diseño de pagina web", "Diseño de contenido"]),
         slug: "marketing-digital",
       },
       {
         title: "Manejo de Redes Sociales",
         description: "Manejo de redes sociales",
-        items: sortArrayString(["Facebook", "Instagram", "Twitter", "TikTok"]),
+        services: sortArrayString(["Facebook", "Instagram", "Twitter", "TikTok"]),
         slug: "manejo-redes-sociales",
       },
     ],

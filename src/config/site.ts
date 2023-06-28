@@ -16,21 +16,21 @@ export const siteConfig = {
       title: "Lobby",
       items: [
         {
-          title: "Imprenta",
-          href: "/imprenta",
-          description: "Impresión de tarjetas, volantes, flayers, etc.",
+          title: "Productos",
+          href: "/categoria",
+          description: "Productos y servicios disponibles",
           items: [],
         },
         {
-          title: "Marketing Digital",
-          href: "/marketing-digital",
-          description: "Marketing digital, diseño web, deiseño de logo, etc.",
+          title: "Contacto",
+          href: "/contacto",
+          description: "Contacta con nosotros",
           items: [],
         },
         {
-          title: "Manejo de Redes Sociales",
-          href: "/manejo-redes-sociales",
-          description: "Manejo de redes sociales, diseño de contenido, etc.",
+          title: "Blog",
+          href: "/blog",
+          description: "Blog de noticias y novedades",
           items: [],
         },
       ],
@@ -38,17 +38,11 @@ export const siteConfig = {
     ...productCategories.map((category) => ({
       title: category.title,
       items: [
-        {
-          title: "All",
-          href: `/categoria/${slugify(category.title)}`,
-          description: `All ${category.title}.`,
-          items: [],
-        },
         ...category.subcategories.map((subcategory) => ({
           title: subcategory.title,
           href: `/categoria/${slugify(category.title)}/${subcategory.slug}`,
           description: subcategory.description,
-          items: [],
+          items: subcategory.services ?? []
         })),
       ],
     })),
