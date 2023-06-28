@@ -4,21 +4,24 @@
 
 @layer base {
   :root {
-    --background: hsl(0, 0%, 98%);
-    --foreground: hsl(0, 100%, 0%);
+    --background: 0 0% 98%;
+    --foreground: 0 100% 0%;
 
-    --primary: hsl(7, 89%, 52%);
-    --primary-foreground: hsl(0, 0%, 98%);
+    --primary: 7 71% 48%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: hsl(9, 91%, 77%);
-    --secondary-foreground: hsl(0, 0%, 2%);
+    --secondary: 9 91% 77%;
+    --secondary-foreground: 0 0% 2%;
 
-    --destructive: hsl(22, 92%, 46%);
-    --destructive-foreground: hsl(0, 0%, 98%);
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: hsl(240, 5.9%, 90%);
-    --input: hsl(240, 5.9%, 90%);
-    --ring: hsl(240, 5%, 64.9%);
+    --accent: 0 0% 95%;
+    --accent-foreground: ;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5% 64.9%;
 
     --radius: 0.5rem;
   }
