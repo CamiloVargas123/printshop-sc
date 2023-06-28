@@ -1,13 +1,12 @@
-import { sortArrayString } from "@/lib/utils"
+import { MainNavItem } from "@/models"
 
-interface ProductCategory {
+interface ProductCategory extends MainNavItem {
   title: string
   subcategories: {
     title: string
     description?: string
     image?: string
-    services?: string[]
-    slug: string
+    slug?: string
   }[]
 }
 
@@ -16,51 +15,45 @@ export const productCategories: ProductCategory[] = [
     title: "imprenta",
     subcategories: [
       {
-        title: "Imprenta",
-        description: "Todo tipo de impresiones",
-        services: sortArrayString(["Tarjeta de visita", "Posters", "Adesivos", "Pendon", "Flayers"]),
-        slug: "imprenta",
+        title: "Tarjeta de visita",
+        slug: "tarjeta-de-visita",
       },
       {
-        title: "Oficina",
-        description: "Impresiones para oficina",
-        slug: "office",
+        title: "Posters",
+        slug: "posters",
       },
       {
-        title: "Gran Formato",
-        description: "Impresiones de gran formato",
-        slug: "large-format",
+        title: "Adesivos",
+        slug: "adesivos",
       },
       {
-        title: "Textil",
-        description: "Impresiones en textil",
-        slug: "textile",
+        title: "Pendon",
+        slug: "pendon",
       },
       {
-        title: "Merchandising",
-        description: "Merchandising",
-        slug: "merchandising",
+        title: "Flayers",
+        slug: "flayers",
       },
     ],
   },
   {
-    title: "Marketing Digital",
+    title: "Digital",
     subcategories: [
       {
-        title: "Marketing Digital",
-        description: "Marketing digital",
-        services: sortArrayString(["Diseño de logo", "Diseño de pagina web", "Diseño de contenido"]),
-        slug: "marketing-digital",
-      },
-      {
         title: "Manejo de Redes Sociales",
-        description: "Manejo de redes sociales",
-        services: sortArrayString(["Facebook", "Instagram", "Twitter", "TikTok"]),
         slug: "manejo-redes-sociales",
       },
+      {
+        title: "Diseño de Paginas Web",
+        slug: "diseno-paginas-web",
+      },
+      {
+        title: "Diseño de contenido",
+        slug: "diseno-contenido",
+      }
     ],
   }
-].sort((a, b) => a.title.localeCompare(b.title))
+]
 
 export const productTags = [
   "new",
