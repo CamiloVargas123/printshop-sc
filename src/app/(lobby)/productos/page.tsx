@@ -22,13 +22,12 @@ export default function ProductsPage() {
       />
       <section>
         <h2 className="text-2xl font-medium mb-2">Categorias</h2>
-        <div className="flex gap-4 flex-wrap justify-between sm:justify-center">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {productCategories.map((category) => (
             <Link
               aria-label={`Ir a ${category}`}
               key={category.title}
               href={`/productos/${slugify(category.title)}`}
-              className='w-full sm:max-w-xs'
             >
               <div className="group relative overflow-hidden rounded">
                 <AspectRatio ratio={4 / 5}>
