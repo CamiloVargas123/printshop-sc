@@ -8,6 +8,13 @@ import { siteConfig } from '@/config/site'
 import { ReduxProvider } from '@/redux/ReduxProvider'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'es-ES': '/es-ES',
+    },
+  },
   title: {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
@@ -42,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: siteConfig.url,
+    url: new URL(siteConfig.url),
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
