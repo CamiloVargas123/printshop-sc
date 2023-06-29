@@ -4,6 +4,7 @@ import {
   Menu,
   X,
   Image,
+  Trash,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -16,6 +17,7 @@ export const Icons = {
   menu: Menu,
   x: X,
   placeholder: Image,
+  trash: Trash,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
