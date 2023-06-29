@@ -3,6 +3,7 @@ import { buttonVariants } from '@/components/ui/Button'
 import { siteConfig } from '@/config/site'
 import MainNav from './MainNav'
 import MobileNav from './MobileNav'
+import { CartSheet } from '@/components/cart/CartSheet'
 
 export default function SiteHeader() {
   return (
@@ -12,6 +13,7 @@ export default function SiteHeader() {
         <MobileNav mainNavItems={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
+            <CartSheet />
             <Link href="/signin" className={buttonVariants({ size: "sm" })}>
               Sing In
               <span className="sr-only">Sing In</span>
