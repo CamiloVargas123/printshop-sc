@@ -1,25 +1,11 @@
-import { MainNavItem } from "@/models"
-
-interface ProductCategory extends MainNavItem {
-  title: string
-  image: {
-    url: string
-    alt?: string
-  }
-  subcategories: {
-    title: string
-    description?: string
-    image?: string
-    slug?: string
-  }[]
-}
+import { ProductCategory } from "@/models"
 
 export const productCategories: ProductCategory[] = [
   {
     title: "Imprenta",
     image: {
       url: "/images/categories/imprenta.webp",
-      alt: "Imprenta",
+      name: "Imprenta imagen representación",
     },
     subcategories: [
       {
@@ -48,7 +34,7 @@ export const productCategories: ProductCategory[] = [
     title: "Digital",
     image: {
       url: "/images/categories/digital.webp",
-      alt: "Digital",
+      name: "Digital imagen representación",
     },
     subcategories: [
       {

@@ -20,14 +20,14 @@ export type MainNavItem = NavItemWithOptionalChildren
 
 export type SidebarNavItem = NavItemWithChildren
 
-
+interface Image {
+  url: string
+  name: string
+}
 export interface ProductBasic {
   id: string
   title: string
-  images: {
-    url: string
-    name: string
-  }[]
+  images: Image[]
   quantity: number
   price: number
   slug: string
@@ -40,3 +40,16 @@ export interface ProductWithMetaDescription extends ProductBasic {
   }[]
 }
 export type Product = ProductWithMetaDescription
+
+
+export interface SubCategories {
+  title: string
+  description?: string
+  image?: Image
+  slug: string
+}
+export interface ProductCategory extends MainNavItem {
+  title: string
+  image: Image
+  subcategories: SubCategories[]
+}

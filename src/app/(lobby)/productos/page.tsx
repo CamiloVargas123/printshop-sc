@@ -34,8 +34,8 @@ export default function ProductsPage() {
                 <AspectRatio ratio={4 / 5}>
                   <div className="absolute inset-0 z-10 bg-muted-foreground/60 transition-colors group-hover:bg-muted-foreground/70" />
                   <Image
-                    src={category.image?.url ?? ''}
-                    alt={category.image?.alt ?? ''}
+                    src={category.image.url}
+                    alt={category.image.name}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"
                     loading="lazy"
