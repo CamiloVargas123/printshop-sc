@@ -2,6 +2,10 @@ import { MainNavItem } from "@/models"
 
 interface ProductCategory extends MainNavItem {
   title: string
+  image: {
+    url: string
+    alt?: string
+  }
   subcategories: {
     title: string
     description?: string
@@ -12,7 +16,11 @@ interface ProductCategory extends MainNavItem {
 
 export const productCategories: ProductCategory[] = [
   {
-    title: "imprenta",
+    title: "Imprenta",
+    image: {
+      url: "/images/categories/imprenta.webp",
+      alt: "Imprenta",
+    },
     subcategories: [
       {
         title: "Tarjeta de visita",
@@ -38,6 +46,10 @@ export const productCategories: ProductCategory[] = [
   },
   {
     title: "Digital",
+    image: {
+      url: "/images/categories/digital.webp",
+      alt: "Digital",
+    },
     subcategories: [
       {
         title: "Manejo de Redes Sociales",
