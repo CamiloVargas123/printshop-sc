@@ -1,5 +1,4 @@
 import { Header } from '@/components/Header'
-import { Shell } from '@/components/Shell'
 import { AspectRatio } from '@/components/ui/AspectRatio'
 import { productCategories } from '@/config/products'
 import { slugify } from '@/lib/utils'
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <Shell>
+    <>
       <Header
         title="Todos nuestros productos"
         description="Encuentra los productos que necesitas"
@@ -50,6 +49,6 @@ export default function ProductsPage() {
           ))}
         </div>
       </section>
-    </Shell>
+    </>
   )
 }

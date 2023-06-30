@@ -2,7 +2,6 @@
 
 import { Header } from '@/components/Header'
 import { ProductCard } from '@/components/ProductCard'
-import { Shell } from '@/components/Shell'
 import { productCategories } from '@/config/products'
 import { slugify } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
@@ -13,7 +12,7 @@ export default function CategoryPage() {
   const products = category.products
 
   return (
-    <Shell>
+    <>
       <Header
         title={category.title}
         size="sm"
@@ -25,6 +24,6 @@ export default function CategoryPage() {
           ))
         }
       </section>
-    </Shell>
+    </>
   )
 }
