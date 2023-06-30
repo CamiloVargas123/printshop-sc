@@ -27,8 +27,8 @@ interface Image {
 export interface ProductBasic {
   id: string
   title: string
-  images: Image[]
   quantity: number
+  images: Image[]
   price: number
   slug: string
   description?: string
@@ -41,15 +41,8 @@ export interface ProductWithMetaDescription extends ProductBasic {
 }
 export type Product = ProductWithMetaDescription
 
-
-export interface SubCategories {
-  title: string
-  description?: string
-  image?: Image
-  slug: string
-}
 export interface ProductCategory extends MainNavItem {
   title: string
   image: Image
-  subcategories: SubCategories[]
+  products: Product[]
 }

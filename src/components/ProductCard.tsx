@@ -10,13 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/Card"
 import { formatPrice } from "@/lib/utils"
-import { SubCategories } from "@/models"
+import { Product } from "@/models"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 interface ProductCardProps {
-  product: SubCategories
+  product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -30,12 +30,11 @@ export function ProductCard({ product }: ProductCardProps) {
       <Card className="h-full overflow-hidden rounded-sm">
         <CardHeader className="border-b p-0">
           <AspectRatio ratio={4 / 3}>
-            {product.image ? (
+            {product.images.length ? (
               <Image
-                src={product.image.url}
-                alt={product.image.name}
+                src={product.images[0].url}
+                alt={product.images[0].name}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
                 loading="lazy"
               />
