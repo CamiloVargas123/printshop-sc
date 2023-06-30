@@ -56,7 +56,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </CardContent>
         <CardFooter className="p-4">
           <div className={buttonVariants({
-            variant: "outline",
+            variant: "secondary",
             size: "sm",
             className: "h-8 w-full rounded-sm",
           })}>
