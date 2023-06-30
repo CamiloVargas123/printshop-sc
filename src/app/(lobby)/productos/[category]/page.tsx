@@ -8,18 +8,18 @@ import { usePathname } from 'next/navigation'
 
 export default function CategoryPage() {
   const categoryPath = usePathname().split('/').at(-1)
-  const category = productCategories.filter((category) => slugify(category.title) === categoryPath)[0]
-  const products = category.products
+  const category = productCategories.find((category) => slugify(category.title) === categoryPath)
+  const products = category?.products
 
   return (
     <>
       <Header
-        title={category.title}
+        title={category?.title ?? ''}
         size="sm"
       />
       <section className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {
-          products.map((product) => (
+          products?.map((product) => (
             <ProductCard key={product.title} product={product} />
           ))
         }
