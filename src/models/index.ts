@@ -27,7 +27,7 @@ interface Image {
 export interface ProductBasic {
   id: string
   title: string
-  quantity: number
+  amount: number
   images: Image[]
   price: number
   slug: string

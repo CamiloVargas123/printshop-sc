@@ -77,7 +77,7 @@ export function CartSheet() {
                         <div className="grid grid-cols-[80px_1fr] text-sm flex-1">
                           <span className="line-clamp-1 font-semibold col-span-2">{item.title}</span>
                           <span className="line-clamp-1">Cantidad:</span>
-                          <span className="line-clamp-1 text-muted-foreground">{item.quantity}</span>
+                          <span className="line-clamp-1 text-muted-foreground">{item.amount}</span>
                           <span className="line-clamp-1">Precio:</span>
                           <span className="line-clamp-1 text-muted-foreground">{formatPrice(item.price)}</span>
                           {
