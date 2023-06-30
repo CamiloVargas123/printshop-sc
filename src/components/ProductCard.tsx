@@ -49,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </AspectRatio>
         </CardHeader>
         <CardContent className="grid gap-2.5 p-4">
-          <CardTitle className="line-clamp-1">{product.title}</CardTitle>
+          <CardTitle>{product.title}</CardTitle>
           <CardDescription className="line-clamp-2">
             {`Desde: ${formatPrice(product.price ?? 0)}`}
           </CardDescription>
