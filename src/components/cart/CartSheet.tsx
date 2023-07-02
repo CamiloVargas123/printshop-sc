@@ -15,11 +15,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/Sheet"
 import { formatPrice, unslugify } from "@/lib/utils"
+import { Product } from "@/models"
 import { useAppSelector } from "@/redux/hooks"
 import Image from "next/image"
 
 export function CartSheet() {
-  const { items, amountAll } = useAppSelector(state => state.cart)
+  const { items, amountAll, totalPrice } = useAppSelector(state => state.cart)
+  const IVA = 1.21
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -50,51 +52,7 @@ export function CartSheet() {
             <div className="flex flex-1 flex-col gap-5 overflow-hidden">
               <ScrollArea className="h-full">
                 <div className="flex flex-col gap-5 pr-6">
-                  {items.map((item) => (
-                    <div key={item.id} className="space-y-3">
-                      <div className="flex items-center space-x-4">
-                        <div className="relative h-16 w-16 overflow-hidden rounded">
-                          {item.images.length ? (
-                            <Image
-                              src={
-                                item.images[0]?.url ??
-                                "/images/product-placeholder.webp"
-                              }
-                              alt={item.images[0]?.name ?? item.title}
-                              fill
-                              className="absolute object-cover"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="flex h-full items-center justify-center bg-secondary">
-                              <Icons.placeholder
-                                className="h-4 w-4"
-                                aria-hidden="true"
-                              />
-                            </div>
-                          )}
-                        </div>
-                        <div className="grid grid-cols-[80px_1fr] text-sm flex-1">
-                          <span className="line-clamp-1 font-semibold col-span-2">{item.title}</span>
-                          <span className="line-clamp-1">Cantidad:</span>
-                          <span className="line-clamp-1 text-muted-foreground">{item.amount}</span>
-                          <span className="line-clamp-1">Precio:</span>
-                          <span className="line-clamp-1 text-muted-foreground">{formatPrice(item.price)}</span>
-                          {
-                            item.metadata?.map((meta) => (
-                              <>
-                                <span key={meta.name} className="line-clamp-1">{`${meta.name}:`}</span>
-                                <span key={meta.value} className="line-clamp-1 text-muted-foreground">{meta.value}</span>
-                              </>
-                            ))
-                          }
-                          <span className="line-clamp-1 text-xs capitalize text-muted-foreground col-span-2">{unslugify(item.slug)}</span>
-                        </div>
-                        <UpdateCart cartItem={item} />
-                      </div>
-                      <Separator />
-                    </div>
-                  ))}
+                  {items.map((item, idx) => <ItemCart key={item.id + idx} item={item} />)}
                 </div>
               </ScrollArea>
             </div>
@@ -102,7 +60,7 @@ export function CartSheet() {
               <Separator className="mb-2" />
               <div className="flex">
                 <span className="flex-1">Subtotal</span>
-                <span>{formatPrice(3.80.toFixed(2))}</span>
+                <span>{formatPrice(totalPrice.toFixed(2))}</span>
               </div>
               <div className="flex">
                 <span className="flex-1">Envio</span>
@@ -115,7 +73,7 @@ export function CartSheet() {
               <Separator className="mt-2" />
               <div className="flex">
                 <span className="flex-1">Total</span>
-                <span>{formatPrice((3.8 * 1.21).toFixed(2))}</span>
+                <span>{formatPrice((totalPrice * IVA).toFixed(2))}</span>
               </div>
               <SheetFooter className="mt-1.5">
                 <Button
@@ -141,5 +99,53 @@ export function CartSheet() {
         )}
       </SheetContent>
     </Sheet>
+  )
+}
+
+function ItemCart({ item }: { item: Product }) {
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center space-x-4">
+        <div className="relative h-16 w-16 overflow-hidden rounded">
+          {item.images.length ? (
+            <Image
+              src={
+                item.images[0]?.url ??
+                "/images/product-placeholder.webp"
+              }
+              alt={item.images[0]?.name ?? item.title}
+              fill
+              className="absolute object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center bg-secondary">
+              <Icons.placeholder
+                className="h-4 w-4"
+                aria-hidden="true"
+              />
+            </div>
+          )}
+        </div>
+        <div className="grid grid-cols-[80px_1fr] text-sm flex-1">
+          <span className="line-clamp-1 font-semibold col-span-2">{item.title}</span>
+          <span className="line-clamp-1">Cantidad:</span>
+          <span className="line-clamp-1 text-muted-foreground">{item.amount}</span>
+          <span className="line-clamp-1">Precio:</span>
+          <span className="line-clamp-1 text-muted-foreground">{formatPrice(item.price)}</span>
+          {
+            item.metadata?.map((meta) => (
+              <>
+                <span key={meta.name} className="line-clamp-1">{`${meta.name}:`}</span>
+                <span key={meta.value} className="line-clamp-1 text-muted-foreground">{meta.value}</span>
+              </>
+            ))
+          }
+          <span className="line-clamp-1 text-xs capitalize text-muted-foreground col-span-2">{unslugify(item.slug)}</span>
+        </div>
+        <UpdateCart cartItem={item} />
+      </div>
+      <Separator />
+    </div>
   )
 }

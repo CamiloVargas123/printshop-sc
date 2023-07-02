@@ -5,10 +5,12 @@ import { RootState } from "../store"
 interface InitialState {
   items: Array<Product>
   amountAll: number
+  totalPrice: number
 }
 const initialState: InitialState = {
   items: [],
-  amountAll: 0
+  amountAll: 0,
+  totalPrice: 0
 }
 
 export const cartSlice = createSlice({
@@ -17,6 +19,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
       state.items = state.items.concat({ ...action.payload })
+      state.totalPrice += action.payload.price
       state.amountAll += 1
     },
     removeToCart: (state, action: PayloadAction<Product>) => {
