@@ -13,19 +13,17 @@ import { formatPrice } from "@/lib/utils"
 import { Product } from "@/models"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 
 interface ProductCardProps {
   product: Product
+  categoryPath: string
 }
 
-export function ProductCard({ product }: ProductCardProps) {
-  const pathName = usePathname()
-
+export function ProductCard({ product, categoryPath }: ProductCardProps) {
   return (
     <Link
       aria-label={`Ver ${product.title} detalle`}
-      href={`${pathName}/${product.slug}`}
+      href={`${categoryPath}/${product.slug}`}
     >
       <Card className="h-full overflow-hidden rounded-sm">
         <CardHeader className="border-b p-0">

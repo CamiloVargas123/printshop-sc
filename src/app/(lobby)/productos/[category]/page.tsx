@@ -1,30 +1,31 @@
-'use client'
-
 import { Header } from '@/components/Header'
 import { ProductCard } from '@/components/ProductCard'
 import { productCategories } from '@/config/products'
 import { slugify } from '@/lib/utils'
-import { notFound, usePathname } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
-export default function CategoryPage() {
-  const categoryPath = usePathname().split('/').at(-1)
-  const category = productCategories.find((category) => slugify(category.title) === categoryPath)
+export default function CategoryPage({ params }: { params: { category: string } }) {
+  const category = productCategories.find((category) => slugify(category.title) === params.category)
   if (!category) return notFound()
   const products = category.products
 
   return (
     <>
       <Header
-        title={category?.title ?? ''}
+        title={category.title}
         size="sm"
       />
       <section className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {
           products.map((product) => (
-            <ProductCard key={product.title} product={product} />
+            <ProductCard key={product.title} categoryPath={slugify(category.title)} product={product} />
           ))
         }
       </section>
     </>
   )
+}
+
+export function generateStaticParams() {
+  return productCategories.map((category) => slugify(category.title))
 }
