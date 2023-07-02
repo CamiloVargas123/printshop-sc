@@ -35,8 +35,9 @@ export default function ProductsPage() {
                     src={category.image.url}
                     alt={category.image.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform group-hover:scale-105"
-                    loading="lazy"
+                    priority
                   />
                 </AspectRatio>
                 <div className="absolute inset-0 z-20 flex items-center justify-center">
