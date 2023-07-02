@@ -1,5 +1,21 @@
 import { ProductCategory } from "@/models"
 
+export enum TypesCategories {
+  IMPRENTA = "imprenta",
+  DIGITAL = "digital",
+}
+
+export enum TypesProducts {
+  TARJETA_DE_VISITA = "tarjeta-visita",
+  POSTERS = "posters",
+  ADHESIVOS = "adhesivos",
+  PENDON = "pendon",
+  FLAYERS = "flayers",
+  DISENO_WEB = "diseno-web",
+  DISENO_CONTENIDO = "diseno-contenido",
+  REDES_SOCIALES = "redes-sociales",
+}
+
 export const productCategories: ProductCategory[] = [
   {
     title: "Imprenta",
@@ -9,7 +25,7 @@ export const productCategories: ProductCategory[] = [
     },
     products: [
       {
-        id: "imprenta_tarjeta-de-visita",
+        id: `${TypesCategories.IMPRENTA}_${TypesProducts.TARJETA_DE_VISITA}`,
         title: "Tarjeta de visita",
         slug: "tarjeta-de-visita",
         amount: 250,
@@ -17,7 +33,7 @@ export const productCategories: ProductCategory[] = [
         images: [],
       },
       {
-        id: "imprenta_poster",
+        id: `${TypesCategories.IMPRENTA}_${TypesProducts.POSTERS}`,
         title: "Posters",
         slug: "poster",
         amount: 100,
@@ -25,7 +41,7 @@ export const productCategories: ProductCategory[] = [
         images: [],
       },
       {
-        id: "imprenta_adhesivo",
+        id: `${TypesCategories.IMPRENTA}_${TypesProducts.ADHESIVOS}`,
         title: "Adhesivos",
         slug: "adhesivo",
         amount: 100,
@@ -33,7 +49,7 @@ export const productCategories: ProductCategory[] = [
         images: [],
       },
       {
-        id: "imprenta_pendon",
+        id: `${TypesCategories.IMPRENTA}_${TypesProducts.PENDON}`,
         title: "Pendon",
         slug: "pendon",
         amount: 10,
@@ -41,10 +57,10 @@ export const productCategories: ProductCategory[] = [
         images: [],
       },
       {
-        id: "imprenta_flyer",
+        id: `${TypesCategories.IMPRENTA}_${TypesProducts.FLAYERS}`,
         title: "Flayers",
         slug: "flayers",
-        amount: 100,
+        amount: 250,
         price: 20.0,
         images: [],
       },
@@ -58,7 +74,7 @@ export const productCategories: ProductCategory[] = [
     },
     products: [
       {
-        id: "digital_redes-sociales",
+        id: `${TypesCategories.DIGITAL}_${TypesProducts.REDES_SOCIALES}`,
         title: "Manejo de Redes Sociales",
         slug: "manejo-redes-sociales",
         amount: 1,
@@ -66,7 +82,7 @@ export const productCategories: ProductCategory[] = [
         images: [],
       },
       {
-        id: "digital_diseño-web",
+        id: `${TypesCategories.DIGITAL}_${TypesProducts.DISENO_WEB}`,
         title: "Diseño de Paginas Web",
         slug: "diseno-paginas-web",
         amount: 1,
@@ -74,7 +90,7 @@ export const productCategories: ProductCategory[] = [
         images: [],
       },
       {
-        id: "digital_diseño-contenido",
+        id: `${TypesCategories.DIGITAL}_${TypesProducts.DISENO_CONTENIDO}`,
         title: "Diseño de contenido",
         slug: "diseno-contenido",
         amount: 1,
