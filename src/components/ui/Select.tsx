@@ -1,10 +1,8 @@
-"use client"
-
-import { Content, Group, Icon, Item, ItemIndicator, ItemText, Label, Portal, Root, Separator, Trigger, Value, Viewport } from "@radix-ui/react-select"
-import { Check, ChevronDown } from "lucide-react"
-
+import { Icons } from "@/components/Icons"
 import { cn } from "@/lib/utils"
+import { Content, Group, Icon as IconSelect, Item, ItemIndicator, ItemText, Label, Portal, Root, Separator, Trigger, Value, Viewport } from "@radix-ui/react-select"
 import { forwardRef } from "react"
+import { useFormField } from "./Form"
 
 const Select = Root
 
@@ -15,21 +13,25 @@ const SelectValue = Value
 const SelectTrigger = forwardRef<
   React.ElementRef<typeof Trigger>,
   React.ComponentPropsWithoutRef<typeof Trigger>
->(({ className, children, ...props }, ref) => (
-  <Trigger
-    ref={ref}
-    className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-      className
-    )}
-    {...props}
-  >
-    {children}
-    <Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
-    </Icon>
-  </Trigger>
-))
+>(({ className, children, ...props }, ref) => {
+  const { error } = useFormField()
+  return (
+    <Trigger
+      ref={ref}
+      className={cn(
+        "flex h-10 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        error && "border-destructive bg-destructive/20",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <IconSelect asChild>
+        <Icons.chevronDown className="h-4 w-4 opacity-50" />
+      </IconSelect>
+    </Trigger>
+  )
+})
 SelectTrigger.displayName = Trigger.displayName
 
 const SelectContent = forwardRef<
@@ -87,7 +89,7 @@ const SelectItem = forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ItemIndicator>
-        <Check className="h-4 w-4" />
+        <Icons.check className="h-4 w-4" />
       </ItemIndicator>
     </span>
 
