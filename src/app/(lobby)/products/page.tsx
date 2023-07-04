@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   description: "Todos nuestros productos",
 }
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
   return (
     <>
       <Header
-        title="Todos nuestros productos"
-        description="Encuentra los productos que necesitas"
+        title="Todas nuestras categorias"
+        description="Sleeciona la categorias que necesitas para encontrar más facilmente lo que buscas"
         size="sm"
       />
       <section>
@@ -52,4 +52,8 @@ export default function ProductsPage() {
       </section>
     </>
   )
+}
+
+export async function generateStaticParams() {
+  return productCategories.map((category) => slugify(category.title))
 }
