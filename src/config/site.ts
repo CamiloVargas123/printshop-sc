@@ -17,7 +17,7 @@ export const siteConfig = {
       items: [
         {
           title: "Productos",
-          href: "/productos",
+          href: "/products",
           description: "Productos y servicios disponibles",
         },
         {
@@ -37,11 +37,11 @@ export const siteConfig = {
       items: [
         {
           title: "Todo",
-          href: `/productos/${slugify(category.title)}`,
+          href: `/products/${slugify(category.title)}`,
         },
         ...category.products.map((product) => ({
           title: product.title,
-          href: `/productos/${slugify(category.title)}/${product.slug}`,
+          href: `/products/${slugify(category.title)}/${product.slug}`,
           description: product.description,
         })),
       ],

@@ -26,7 +26,7 @@ export default function ProductsPage() {
             <Link
               aria-label={`Ir a ${category}`}
               key={category.title}
-              href={`/productos/${slugify(category.title)}`}
+              href={`/products/${slugify(category.title)}`}
             >
               <div className="group relative overflow-hidden rounded">
                 <AspectRatio ratio={4 / 5}>
