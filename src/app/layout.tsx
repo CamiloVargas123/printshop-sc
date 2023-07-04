@@ -1,11 +1,12 @@
-import '@/style/globals.css'
+import { TailwindIndicator } from '@/components/TailwindIndicator'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { siteConfig } from '@/config/site'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { TailwindIndicator } from '@/components/TailwindIndicator'
-import { Metadata } from 'next'
-import { siteConfig } from '@/config/site'
 import { ReduxProvider } from '@/redux/ReduxProvider'
+import '@/style/globals.css'
+import { ClerkProvider } from '@clerk/nextjs'
+import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -73,22 +74,24 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <head />
-      <body
-        className={cn(
-          "min-h-screen",
-          fontSans.variable,
-          fontMono.variable
-        )}
-      >
-        <ReduxProvider>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-            {children}
-            <TailwindIndicator />
-          </ThemeProvider>
-        </ReduxProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="es" suppressHydrationWarning>
+        <head />
+        <body
+          className={cn(
+            "min-h-screen",
+            fontSans.variable,
+            fontMono.variable
+          )}
+        >
+          <ReduxProvider>
+            <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+              {children}
+              <TailwindIndicator />
+            </ThemeProvider>
+          </ReduxProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
