@@ -1,4 +1,3 @@
-
 import { Icons } from "@/components/Icons"
 import AddToCart from "@/components/cart/AddToCart"
 import { AspectRatio } from "@/components/ui/AspectRatio"
@@ -43,7 +42,7 @@ export default async function ProductPage({ params }: { params: { category: stri
   )
 }
 
-export function generateStaticParams({
+export async function generateStaticParams({
   params: { categoryPath },
 }: {
   params: { categoryPath: string }

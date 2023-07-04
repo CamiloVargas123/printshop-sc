@@ -2,11 +2,6 @@ import { type UserRole } from "@/models"
 import { clerkClient } from "@clerk/nextjs"
 import { authMiddleware } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
-import { productCategories } from "./config/products"
-import { slugify } from "./lib/utils"
-
-const SSR_URL_GENERATE_CATEGORIES = productCategories.map(category => `/products/${slugify(category.title)}`)
-const SSR_URL_GENERATE_PRODUCTS = productCategories.map(category => category.products.map(product => `/products/${slugify(category.title)}/${product.slug}`)).flat()
 
 export default authMiddleware({
   // Public routes are routes that don't require authentication
@@ -14,8 +9,8 @@ export default authMiddleware({
     "/",
     "/signin(.*)",
     "/signup(.*)",
-    "/products",
-  ].concat(SSR_URL_GENERATE_CATEGORIES).concat(SSR_URL_GENERATE_PRODUCTS),
+    "/products(.*)",
+  ],
 
   async afterAuth(auth, req) {
     if (auth.isPublicRoute) {
