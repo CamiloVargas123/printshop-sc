@@ -7,7 +7,7 @@ import { slugify } from "@/lib/utils"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
-export default async function ProductPage({ params }: { params: { category: string, product: string } }) {
+export default function ProductPage({ params }: { params: { category: string, product: string } }) {
   const product = productCategories.find((category) => slugify(category.title) === params.category)?.products.find((product) => slugify(product.slug) === params.product)
   if (!product) return notFound()
   return (
@@ -40,16 +40,4 @@ export default async function ProductPage({ params }: { params: { category: stri
       </div>
     </>
   )
-}
-
-export async function generateStaticParams({
-  params: { categoryPath },
-}: {
-  params: { categoryPath: string }
-}) {
-  return productCategories.map((category) => {
-    if (slugify(category.title) === categoryPath) {
-      return category.products.map((product) => ({ product: product.slug }))
-    }
-  })
 }

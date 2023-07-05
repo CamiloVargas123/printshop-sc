@@ -4,7 +4,7 @@ import { productCategories } from '@/config/products'
 import { slugify } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
+export default function CategoryPage({ params }: { params: { category: string } }) {
   const category = productCategories.find((category) => slugify(category.title) === params.category)
   if (!category) return notFound()
   const products = category.products

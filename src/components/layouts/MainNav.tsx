@@ -3,7 +3,6 @@
 import { forwardRef, ElementRef, ComponentPropsWithoutRef } from "react"
 import Link from "next/link"
 import { MainNavItem } from "@/models"
-
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import {
@@ -18,10 +17,10 @@ import {
 import { Icons } from "@/components/Icons"
 
 interface MainNavProps {
-  items?: MainNavItem[]
+  mainNavItems?: MainNavItem[]
 }
 
-export default function MainNav({ items }: MainNavProps) {
+export default function MainNav({ mainNavItems }: MainNavProps) {
   return (
     <div className="hidden gap-6 lg:flex">
       <Link
@@ -36,10 +35,10 @@ export default function MainNav({ items }: MainNavProps) {
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
-          {items?.[0]?.items ? (
+          {mainNavItems?.[0]?.items ? (
             <NavigationMenuItem>
               <NavigationMenuTrigger className="h-auto" >
-                {items[0].title}
+                {mainNavItems[0].title}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid items-center gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
@@ -60,7 +59,7 @@ export default function MainNav({ items }: MainNavProps) {
                       </a>
                     </NavigationMenuLink>
                   </li>
-                  {items[0].items.map((item) => (
+                  {mainNavItems[0].items.map((item) => (
                     <ListItem
                       key={item.title}
                       title={item.title}
@@ -73,8 +72,8 @@ export default function MainNav({ items }: MainNavProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
           ) : null}
-          {items
-            ?.filter((item) => item.title !== items[0]?.title)
+          {mainNavItems
+            ?.filter((item) => item.title !== mainNavItems[0]?.title)
             .map((item) =>
               item?.items ? (
                 <NavigationMenuItem key={item.title}>

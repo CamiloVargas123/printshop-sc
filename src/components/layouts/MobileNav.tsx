@@ -57,7 +57,7 @@ export default function MobileNav({ mainNavItems }: MobileNavProps) {
                         subItem.href ? (
                           <MobileLink
                             key={index}
-                            href={String(subItem.href)}
+                            href={subItem.href}
                             pathname={pathname}
                             setIsOpen={setIsOpen}
                             disabled={subItem.disabled}
