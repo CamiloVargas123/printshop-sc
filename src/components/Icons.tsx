@@ -9,6 +9,8 @@ import {
   Trash,
   User2,
   X,
+  Eye,
+  EyeOff,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -26,6 +28,8 @@ export const Icons = {
   chevronDown: ChevronDown,
   user: User2,
   spinner: Loader2,
+  view: Eye,
+  viewOff: EyeOff,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
