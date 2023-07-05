@@ -1,5 +1,6 @@
 import { TailwindIndicator } from '@/components/TailwindIndicator'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { Toaster } from '@/components/ui/Toaster'
 import { siteConfig } from '@/config/site'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
@@ -89,6 +90,7 @@ export default function RootLayout({
               {children}
               <TailwindIndicator />
             </ThemeProvider>
+            <Toaster />
           </ReduxProvider>
         </body>
       </html>
