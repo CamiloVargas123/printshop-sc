@@ -21,7 +21,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, categoryPath }: ProductCardProps) {
   return (
-    <Card className="h-full overflow-hidden rounded-sm">
+    <Card className="h-full overflow-hidden">
       <CardHeader className="border-b p-0">
         <AspectRatio ratio={4 / 3}>
           {product.images.length ? (
