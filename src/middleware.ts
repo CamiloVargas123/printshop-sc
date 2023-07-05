@@ -1,4 +1,4 @@
-import { type UserRole } from "@/models"
+import { UserRole } from "@/models"
 import { clerkClient } from "@clerk/nextjs"
 import { authMiddleware } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
@@ -39,7 +39,7 @@ export default authMiddleware({
       await clerkClient.users.updateUser(auth.userId, {
         privateMetadata: {
           ...user.privateMetadata,
-          role: "user" satisfies UserRole,
+          role: UserRole.USER,
         },
       })
     }

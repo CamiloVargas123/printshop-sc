@@ -1,4 +1,8 @@
-export type UserRole = "user" | "admin"
+export enum UserRole {
+  USER = "user",
+  ADMIN = "admin",
+}
+
 export interface NavItem {
   title: string
   href?: string
