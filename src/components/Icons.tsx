@@ -1,12 +1,14 @@
 import {
-  ShoppingCart,
-  Layers,
-  Menu,
-  X,
-  Image,
-  Trash,
   Check,
   ChevronDown,
+  Image,
+  Layers,
+  Loader2,
+  Menu,
+  ShoppingCart,
+  Trash,
+  User2,
+  X,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -22,6 +24,8 @@ export const Icons = {
   trash: Trash,
   check: Check,
   chevronDown: ChevronDown,
+  user: User2,
+  spinner: Loader2,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
