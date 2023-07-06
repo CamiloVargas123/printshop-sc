@@ -6,6 +6,7 @@ export function Toaster() {
   return (
     <RadToaster
       position="bottom-right"
+      duration={5000}
       toastOptions={{
         style: {
           background: "hsl(var(--background))",
