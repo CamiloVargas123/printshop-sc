@@ -15,6 +15,10 @@ export const authSchema = z.object({
     }),
 })
 
+export const checkEmailSchema = z.object({
+  email: authSchema.shape.email,
+})
+
 export const verfifyEmailSchema = z.object({
   code: z
     .string()
