@@ -14,3 +14,12 @@ export const authSchema = z.object({
       message: "Contraseña debe tener al menos una mayúscula, un número y un caracter especial",
     }),
 })
+
+export const verfifyEmailSchema = z.object({
+  code: z
+    .string()
+    .min(6, {
+      message: "Código de verificación tiene debe tener una longitud de 6 caracteres",
+    })
+    .max(6),
+})
