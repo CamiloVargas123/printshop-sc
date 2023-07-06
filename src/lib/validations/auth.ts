@@ -27,3 +27,14 @@ export const verfifyEmailSchema = z.object({
     })
     .max(6),
 })
+
+export const resetPasswordSchema = z
+  .object({
+    password: authSchema.shape.password,
+    confirmPassword: authSchema.shape.password,
+    code: verfifyEmailSchema.shape.code,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirmPassword"],
+  })
