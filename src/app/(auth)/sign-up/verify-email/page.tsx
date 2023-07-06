@@ -6,13 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card"
+import { env } from "@/env.mjs"
 import { auth } from "@clerk/nextjs"
 import { type Metadata } from "next"
 import { redirect } from "next/navigation"
 import { VerifyEmailForm } from "./components/VerifyEmailForm"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'localhost:3000'),
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: "Verificar email",
   description: "Verifica tu email para completar el registro",
 }

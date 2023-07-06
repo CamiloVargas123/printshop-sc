@@ -1,9 +1,10 @@
+import { env } from '@/env.mjs';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './slices';
 
 export const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: env.NEXT_PUBLIC_NODE_ENV !== 'production',
 })
 
 export type RootState = ReturnType<typeof store.getState>

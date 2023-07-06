@@ -6,13 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card"
+import { env } from "@/env.mjs"
 import { auth } from "@clerk/nextjs"
 import { type Metadata } from "next"
 import { redirect } from "next/navigation"
 import { ResetPasswordForm } from "./components/ResetPasswordForm"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'localhost:3000'),
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: "Restablecer contraseña",
   description: "Ingresa tu email para restablecer tu contraseña",
 }
