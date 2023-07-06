@@ -4,7 +4,7 @@ import { currentUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { OAuthSignIn } from '../components/auth/OAuthSignIn'
-import { SignInForm } from '../components/form/SignInForm'
+import { SignInForm } from './components/SignInForm'
 
 export default async function SingInPage() {
   const user = await currentUser()
@@ -37,7 +37,7 @@ export default async function SingInPage() {
           <div className="flex-1 text-sm text-muted-foreground">
             ¿No tienes una cuenta?{" "}
             <Link
-              aria-label="Registrarse"
+              aria-label="registrarse"
               href="/sign-up"
               className="text-primary underline-offset-4 transition-colors hover:underline"
             >

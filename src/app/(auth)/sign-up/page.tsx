@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { currentUser } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
 import { OAuthSignIn } from "../components/auth/OAuthSignIn"
-import { SignUpForm } from "../components/form/SignUpForm"
+import { SignUpForm } from "./components/SignUpForm"
 import Link from "next/link"
 
 export default async function SingUpPage() {
