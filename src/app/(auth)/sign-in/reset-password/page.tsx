@@ -6,10 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card"
+import { auth } from "@clerk/nextjs"
 import { type Metadata } from "next"
-import { ResetPasswordForm } from "./components/ResetPasswordForm"
-import { currentUser } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
+import { ResetPasswordForm } from "./components/ResetPasswordForm"
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'localhost:3000'),
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 }
 
 export default async function ResetPasswordPage() {
-  const user = await currentUser()
-  if (user) return redirect("/")
-  
+  const { userId } = auth()
+  if (userId) return redirect("/")
+
   return (
     <Shell layout="auth">
       <Card>

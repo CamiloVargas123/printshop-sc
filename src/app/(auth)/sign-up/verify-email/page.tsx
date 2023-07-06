@@ -6,7 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card"
+import { auth } from "@clerk/nextjs"
 import { type Metadata } from "next"
+import { redirect } from "next/navigation"
 import { VerifyEmailForm } from "./components/VerifyEmailForm"
 
 export const metadata: Metadata = {
@@ -16,6 +18,9 @@ export const metadata: Metadata = {
 }
 
 export default function VerifyEmailPage() {
+  const { userId } = auth()
+  if (userId) return redirect("/")
+
   return (
     <Shell layout="auth">
       <Card>

@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site'
 import Link from 'next/link'
 import MainNav from './MainNav'
 import MobileNav from './MobileNav'
+import { SignOutButton } from '@clerk/nextjs'
 
 export default function SiteHeader() {
   return (
@@ -19,6 +20,12 @@ export default function SiteHeader() {
               <Icons.user className="w-5 h-5" />
               <span className="sr-only">Acceder</span>
             </Link>
+            <SignOutButton>
+              <button className={buttonVariants({ variant: "outline" })}>
+              salir
+
+              </button>
+            </SignOutButton>
           </nav>
         </div>
       </div>

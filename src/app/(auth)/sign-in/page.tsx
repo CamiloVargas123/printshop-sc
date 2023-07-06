@@ -1,14 +1,14 @@
 import { Shell } from '@/components/Shell'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
-import { currentUser } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { OAuthSignIn } from '../components/auth/OAuthSignIn'
 import { SignInForm } from './components/SignInForm'
 
 export default async function SingInPage() {
-  const user = await currentUser()
-  if (user) return redirect("/")
+  const { userId } = auth()
+  if (userId) return redirect("/")
 
   return (
     <Shell layout="auth">

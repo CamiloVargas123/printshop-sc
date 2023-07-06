@@ -1,14 +1,14 @@
 import { Shell } from "@/components/Shell"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card"
-import { currentUser } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs"
+import Link from "next/link"
 import { redirect } from "next/navigation"
 import { OAuthSignIn } from "../components/auth/OAuthSignIn"
 import { SignUpForm } from "./components/SignUpForm"
-import Link from "next/link"
 
 export default async function SingUpPage() {
-  const user = await currentUser()
-  if (user) return redirect("/")
+  const { userId } = auth()
+  if (userId) return redirect("/")
 
   return (
     <Shell layout="auth">
