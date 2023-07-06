@@ -11,6 +11,9 @@ import {
   X,
   Eye,
   EyeOff,
+  LogOut,
+  Settings,
+  FileTerminal,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -30,6 +33,9 @@ export const Icons = {
   spinner: Loader2,
   view: Eye,
   viewOff: EyeOff,
+  logout: LogOut,
+  settings: Settings,
+  terminal: FileTerminal,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
