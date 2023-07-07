@@ -1,10 +1,6 @@
 "use client"
 
-import { forwardRef, ElementRef, ComponentPropsWithoutRef } from "react"
-import Link from "next/link"
-import { MainNavItem } from "@/models"
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
+import { Icons } from "@/components/Icons"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,7 +10,11 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/NavigationMenu"
-import { Icons } from "@/components/Icons"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { MainNavItem } from "@/models"
+import Link from "next/link"
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react"
 
 interface MainNavProps {
   mainNavItems?: MainNavItem[]
@@ -44,7 +44,7 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
                 <ul className="grid items-center gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
-                      <a
+                      <Link
                         aria-label="Home"
                         className="flex h-full w-full select-none flex-col justify-end rounded-sm bg-gradient-to-b from-secondary/50 to-secondary p-6 no-underline outline-none focus:shadow-md"
                         href="/"
@@ -56,7 +56,7 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
                         <p className="text-sm leading-tight text-muted-foreground">
                           {siteConfig.description}
                         </p>
-                      </a>
+                      </Link>
                     </NavigationMenuLink>
                   </li>
                   {mainNavItems[0].items.map((item) => (
@@ -119,7 +119,8 @@ const ListItem = forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
+          href={props.href ?? ''}
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-sm p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -134,7 +135,7 @@ const ListItem = forwardRef<
               {children}
             </p>
           }
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   )
