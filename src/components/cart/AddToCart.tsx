@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { nanoid } from 'nanoid'
+import { toast } from 'sonner'
 
 interface AddToCartProps {
   product: Product
@@ -35,6 +36,7 @@ export default function AddToCart(props: AddToCartProps) {
   const dispatch = useAppDispatch()
   function onSubmit(data: ProductCart) {
     dispatch(addToCart(changeIdProduct(data)))
+    toast('Producto agregado al carrito')
   }
 
   function getSelectedValues({ name, value }: { name: string, value: string }) {
