@@ -10,10 +10,14 @@ import { addToCart } from '@/redux/slices/cart'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid'
+import { nanoid } from 'nanoid'
 
 interface AddToCartProps {
   product: Product
+}
+function changeIdProduct(data: ProductCart): ProductCart {
+  data.id = nanoid()
+  return data
 }
 
 export default function AddToCart(props: AddToCartProps) {
@@ -27,11 +31,6 @@ export default function AddToCart(props: AddToCartProps) {
     resolver: zodResolver(productSchema),
     defaultValues: defaultValues,
   })
-
-  function changeIdProduct(data: ProductCart): ProductCart {
-    data.id = uuidv4()
-    return data
-  }
 
   const dispatch = useAppDispatch()
   function onSubmit(data: ProductCart) {
