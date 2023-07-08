@@ -14,14 +14,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/Sheet"
-import { formatPrice, unslugify } from "@/lib/utils"
-import { Product } from "@/models"
+import { formatPrice } from "@/lib/utils"
+import type { ProductCart } from "@/models"
 import { useAppSelector } from "@/redux/hooks"
 import Image from "next/image"
+import { Fragment } from "react"
 
+const IVA = 1.21
 export function CartSheet() {
-  const { items, amountAll, totalPrice } = useAppSelector(state => state.cart)
-  const IVA = 1.21
+  const { items, amountAll, subTotal } = useAppSelector(state => state.cart)
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -52,7 +53,7 @@ export function CartSheet() {
             <div className="flex flex-1 flex-col gap-5 overflow-hidden">
               <ScrollArea className="h-full">
                 <div className="flex flex-col gap-5 pr-6">
-                  {items.map((item, idx) => <ItemCart key={item.id + idx} item={item} />)}
+                  {items.map(item => <ItemCart key={item.id} item={item} />)}
                 </div>
               </ScrollArea>
             </div>
@@ -60,7 +61,7 @@ export function CartSheet() {
               <Separator className="mb-2" />
               <div className="flex">
                 <span className="flex-1">Subtotal</span>
-                <span>{formatPrice(totalPrice.toFixed(2))}</span>
+                <span>{formatPrice(subTotal.toFixed(2))}</span>
               </div>
               <div className="flex">
                 <span className="flex-1">Envio</span>
@@ -73,7 +74,7 @@ export function CartSheet() {
               <Separator className="mt-2" />
               <div className="flex">
                 <span className="flex-1">Total</span>
-                <span>{formatPrice((totalPrice * IVA).toFixed(2))}</span>
+                <span>{formatPrice((subTotal * IVA).toFixed(2))}</span>
               </div>
               <SheetFooter className="mt-1.5">
                 <Button
@@ -102,7 +103,7 @@ export function CartSheet() {
   )
 }
 
-function ItemCart({ item }: { item: Product }) {
+function ItemCart({ item }: { item: ProductCart }) {
   return (
     <div className="space-y-3">
       <div className="flex items-center space-x-4">
@@ -127,21 +128,18 @@ function ItemCart({ item }: { item: Product }) {
             </div>
           )}
         </div>
-        <div className="grid grid-cols-[80px_1fr] text-sm flex-1">
+        <div className="grid grid-cols-[155px_1fr] text-sm flex-1">
           <span className="line-clamp-1 font-semibold col-span-2">{item.title}</span>
-          <span className="line-clamp-1">Cantidad:</span>
-          <span className="line-clamp-1 text-muted-foreground">{item.amount}</span>
           <span className="line-clamp-1">Precio:</span>
           <span className="line-clamp-1 text-muted-foreground">{formatPrice(item.price)}</span>
           {
-            item.metadata?.map((meta) => (
-              <>
-                <span key={meta.name} className="line-clamp-1">{`${meta.name}:`}</span>
-                <span key={meta.value} className="line-clamp-1 text-muted-foreground">{meta.value}</span>
-              </>
+            item.metadata.map(meta => (
+              <Fragment key={meta.name}>
+                <span className="line-clamp-1">{`${meta.name}:`}</span>
+                <span className="line-clamp-1 text-muted-foreground">{meta.values.name}</span>
+              </Fragment>
             ))
           }
-          <span className="line-clamp-1 text-xs capitalize text-muted-foreground col-span-2">{unslugify(item.slug)}</span>
         </div>
         <UpdateCart cartItem={item} />
       </div>

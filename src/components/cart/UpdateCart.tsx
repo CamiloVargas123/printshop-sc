@@ -1,11 +1,11 @@
 import { Icons } from "@/components/Icons"
 import { Button } from "@/components/ui/Button"
-import type { Product } from "@/models"
+import type { ProductCart } from "@/models"
 import { useAppDispatch } from "@/redux/hooks"
 import { removeToCart } from "@/redux/slices/cart"
 
 interface UpdateCartProps {
-  cartItem: Product
+  cartItem: ProductCart
 }
 
 export function UpdateCart({ cartItem }: UpdateCartProps) {
