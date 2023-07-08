@@ -3,7 +3,7 @@ import AddToCart from "@/components/cart/AddToCart"
 import { AspectRatio } from "@/components/ui/AspectRatio"
 import { Separator } from "@/components/ui/Separator"
 import { productCategories } from "@/config/products"
-import { formatPrice, slugify } from "@/lib/utils"
+import { slugify } from "@/lib/utils"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
@@ -31,13 +31,10 @@ export default function ProductPage({ params }: { params: { category: string, pr
             </div>
           )}
         </AspectRatio>
-        <div className="flex flex-col gap-4 relative">
+        <div className="flex flex-col gap-2 relative">
           <Separator orientation="vertical" className="hidden md:block absolute -left-2 top-0 lg:-left-3" />
           <Separator orientation="horizontal" className="block md:hidden absolute left-0 -top-3" />
-          <div className="flex flex-col gap-1">
-            <h1 className="text-3xl font-bold tracking-tight">{product.title}</h1>
-            <span className="text-2xl text-primary tracking-tighter font-mono">{formatPrice(product.price)}</span>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight">{product.title}</h1>
           <AddToCart product={product} />
         </div>
       </div>
