@@ -29,22 +29,34 @@ interface Image {
   url: string
   name: string
 }
+export interface ValueWithPorcentage {
+  name: string | number
+  porcentage: number
+}
+interface MetadataArrayValue {
+  name: string
+  values: ValueWithPorcentage[]
+}
+export interface MetadataUniqueValue {
+  name: string
+  values: ValueWithPorcentage
+}
 export interface ProductBasic {
   id: string
   title: string
-  amount: number
   images: Image[]
   price: number
   slug: string
   description?: string
 }
-export interface ProductWithMetaDescription extends ProductBasic {
-  metadata?: {
-    name: string
-    value: string
-  }[]
+export interface ProductWithMetadata extends ProductBasic {
+  metadata: MetadataArrayValue[]
 }
-export type Product = ProductWithMetaDescription
+export interface ProductWithMetadataCart extends ProductBasic {
+  metadata: MetadataUniqueValue[]
+}
+export type Product = ProductWithMetadata
+export type ProductCart = ProductWithMetadataCart
 
 export interface ProductCategory extends MainNavItem {
   title: string
