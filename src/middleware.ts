@@ -11,6 +11,7 @@ export default authMiddleware({
     "/sign-up(.*)",
     "/sso-callback(.*)",
     "/products(.*)",
+    "/checkout"
   ],
 
   async afterAuth(auth, req) {
