@@ -1,19 +1,20 @@
 import {
   Check,
   ChevronDown,
+  ExternalLink,
+  Eye,
+  EyeOff,
+  FileTerminal,
   Image,
   Layers,
   Loader2,
+  LogOut,
   Menu,
+  Settings,
   ShoppingCart,
   Trash,
   User2,
   X,
-  Eye,
-  EyeOff,
-  LogOut,
-  Settings,
-  FileTerminal,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -36,6 +37,7 @@ export const Icons = {
   logout: LogOut,
   settings: Settings,
   terminal: FileTerminal,
+  externalLink: ExternalLink,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
