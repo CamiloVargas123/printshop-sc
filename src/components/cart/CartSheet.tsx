@@ -1,6 +1,7 @@
 'use client'
 
 import { Icons } from "@/components/Icons"
+import ItemCart from "@/components/cart/ItemCart"
 import { UpdateCart } from "@/components/cart/UpdateCart"
 import { Badge } from "@/components/ui/Badge"
 import { Button, buttonVariants } from "@/components/ui/Button"
@@ -14,14 +15,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/Sheet"
-import { formatPrice } from "@/lib/utils"
-import type { ProductCart } from "@/models"
+import { IVA, formatPrice } from "@/lib/utils"
 import { useAppSelector } from "@/redux/hooks"
-import Image from "next/image"
 import Link from "next/link"
-import { Fragment } from "react"
 
-const IVA = 1.21
 export function CartSheet() {
   const { items, amountAll, subTotal } = useAppSelector(state => state.cart)
   return (
@@ -54,7 +51,7 @@ export function CartSheet() {
             <div className="flex flex-1 flex-col gap-5 overflow-hidden">
               <ScrollArea className="h-full">
                 <div className="flex flex-col gap-5 pr-6">
-                  {items.map(item => <ItemCart key={item.id} item={item} />)}
+                  {items.map(item => <ItemCart key={item.id} item={item}><UpdateCart cartItem={item} /></ItemCart>)}
                 </div>
               </ScrollArea>
             </div>
@@ -103,50 +100,5 @@ export function CartSheet() {
         )}
       </SheetContent>
     </Sheet>
-  )
-}
-
-function ItemCart({ item }: { item: ProductCart }) {
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center space-x-4">
-        <div className="relative h-16 w-16 overflow-hidden rounded">
-          {item.images.length ? (
-            <Image
-              src={
-                item.images[0]?.url ??
-                "/images/product-placeholder.webp"
-              }
-              alt={item.images[0]?.name ?? item.title}
-              fill
-              className="absolute object-cover"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center bg-secondary">
-              <Icons.placeholder
-                className="h-4 w-4"
-                aria-hidden="true"
-              />
-            </div>
-          )}
-        </div>
-        <div className="grid grid-cols-[155px_1fr] text-sm flex-1">
-          <span className="line-clamp-1 font-semibold col-span-2">{item.title}</span>
-          <span className="line-clamp-1">Precio:</span>
-          <span className="line-clamp-1 text-muted-foreground">{formatPrice(item.price)}</span>
-          {
-            item.metadata.map(meta => (
-              <Fragment key={meta.name}>
-                <span className="line-clamp-1">{`${meta.name}:`}</span>
-                <span className="line-clamp-1 text-muted-foreground">{meta.values.name}</span>
-              </Fragment>
-            ))
-          }
-        </div>
-        <UpdateCart cartItem={item} />
-      </div>
-      <Separator />
-    </div>
   )
 }
