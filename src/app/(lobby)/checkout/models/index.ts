@@ -8,6 +8,12 @@ interface CheckoutData {
   postalCode: string
   email?: string
   note?: string
+  paymentMethod: PaymentMethod
+  transferReference: string
 }
+export enum PaymentMethod  {
+  TRANSFER = 'Transferencia bancaria',
+}
+
 
 export type CheckoutInputs = CheckoutData
