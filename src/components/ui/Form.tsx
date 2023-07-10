@@ -1,5 +1,8 @@
+import { Label } from "@/components/ui/Label"
+import { cn } from "@/lib/utils"
 import type { Root } from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
+import { createContext, forwardRef, useContext, useId } from "react"
 import {
   Controller,
   FormProvider,
@@ -8,9 +11,6 @@ import {
   type FieldPath,
   type FieldValues
 } from "react-hook-form"
-import { Label } from "@/components/ui/Label"
-import { cn } from "@/lib/utils"
-import { createContext, forwardRef, useContext, useId } from "react"
 
 const Form = FormProvider
 
@@ -77,7 +77,7 @@ const FormItem = forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-1", className)} {...props} />
     </FormItemContext.Provider>
   )
 })
@@ -85,17 +85,22 @@ FormItem.displayName = "FormItem"
 
 const FormLabel = forwardRef<
   React.ElementRef<typeof Root>,
-  React.ComponentPropsWithoutRef<typeof Root>
+  React.ComponentPropsWithoutRef<typeof Root> & { required?: boolean }
 >(({ className, ...props }, ref) => {
   const { formItemId } = useFormField()
 
   return (
-    <Label
-      ref={ref}
-      className={cn(className)}
-      htmlFor={formItemId}
-      {...props}
-    />
+    <>
+      <Label
+        ref={ref}
+        className={cn(className)}
+        htmlFor={formItemId}
+        {...props}
+      />
+      {
+        props.required && <span className="text-destructive cursor-default" title="Campo requerido.">{" "}*</span>
+      }
+    </>
   )
 })
 FormLabel.displayName = "FormLabel"
