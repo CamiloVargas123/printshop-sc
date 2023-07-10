@@ -26,3 +26,5 @@ export function formatPrice(price: number | string) {
     currency: "EUR",
   }).format(Number(price))
 }
+
+export const IVA = 1.21
