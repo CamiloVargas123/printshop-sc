@@ -3,7 +3,7 @@
 import { Icons } from "@/components/Icons"
 import { UpdateCart } from "@/components/cart/UpdateCart"
 import { Badge } from "@/components/ui/Badge"
-import { Button } from "@/components/ui/Button"
+import { Button, buttonVariants } from "@/components/ui/Button"
 import { ScrollArea } from "@/components/ui/ScrollArea"
 import { Separator } from "@/components/ui/Separator"
 import {
@@ -18,6 +18,7 @@ import { formatPrice } from "@/lib/utils"
 import type { ProductCart } from "@/models"
 import { useAppSelector } from "@/redux/hooks"
 import Image from "next/image"
+import Link from "next/link"
 import { Fragment } from "react"
 
 const IVA = 1.21
@@ -77,13 +78,15 @@ export function CartSheet() {
                 <span>{formatPrice((subTotal * IVA).toFixed(2))}</span>
               </div>
               <SheetFooter className="mt-1.5">
-                <Button
-                  aria-label="Proceed to checkout"
-                  size="sm"
-                  className="w-full"
-                >
-                  Proceder a pagar
-                </Button>
+                <SheetTrigger asChild>
+                  <Link
+                    href="/checkout"
+                    aria-label="Proceed to checkout"
+                    className={buttonVariants({ className: "w-full h-10" })}
+                  >
+                    Proceder a pagar
+                  </Link>
+                </SheetTrigger>
               </SheetFooter>
             </div>
           </>
