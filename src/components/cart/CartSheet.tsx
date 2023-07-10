@@ -70,7 +70,7 @@ export function CartSheet() {
               </div>
               <div className="flex">
                 <span className="flex-1">IVA ~ 21% (España)</span>
-                <span>Calcular al pagar</span>
+                <span>{formatPrice((subTotal * (IVA - 1)).toFixed(2))}</span>
               </div>
               <Separator className="mt-2" />
               <div className="flex">
