@@ -57,7 +57,7 @@ export default function SiteHeader({ user }: SiteHeaderProps) {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuItem asChild disabled={!isAdmin}>
-                        <Link href={`/dashboard/${isAdmin ? "admin" : "account"}`}>
+                        <Link href={`/dashboard/${isAdmin ? "orders" : "account"}`}>
                           <Icons.terminal
                             className="mr-2 h-4 w-4"
                             aria-hidden="true"
