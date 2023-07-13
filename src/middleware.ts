@@ -46,6 +46,15 @@ export default authMiddleware({
       })
     }
   },
+  async beforeAuth(req) {
+    const requestHeaders = new Headers(req.headers)
+    requestHeaders.set("pathName", req.nextUrl.pathname)
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      }
+    })
+  }
 })
 
 export const config = {
