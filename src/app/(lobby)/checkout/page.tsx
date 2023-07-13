@@ -3,22 +3,28 @@ import { Header } from '@/components/Header'
 import { Shell } from '@/components/Shell'
 import { Form } from '@/components/ui/Form'
 import { Separator } from '@/components/ui/Separator'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { clearCart } from '@/redux/slices/cart'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import PaymentForm from './components/PaymentForm'
 import PersonalDataForm from './components/PersonalDataForm'
 import { checkoutInputsSchema } from './lib/validations/personalData'
-import { CheckoutInputs, PaymentMethod } from './models'
+import { PaymentMethod, type CheckoutInputs } from './models'
+import { submitOrder } from './services'
 
 export default function CheckoutPage() {
-
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+  const cart = useAppSelector(state => state.cart)
   const [isPending, startTransition] = useTransition()
   const form = useForm<CheckoutInputs>({
     resolver: zodResolver(checkoutInputsSchema),
     defaultValues: {
-      name: "",
+      fullName: "",
       telephone: "",
       city: "",
       state: "",
@@ -29,12 +35,15 @@ export default function CheckoutPage() {
       transferReference: "",
     },
   })
-  console.log("🚀 ~ file: page.tsx:30 ~ CheckoutPage ~ form:", form.formState.errors)
 
-  function onSubmit(data: CheckoutInputs) {
+  function onSubmit(paymentData: CheckoutInputs) {
+    if (cart.items.length === 0) return
     startTransition(async () => {
       try {
-        console.log("🚀 ~ file: page.tsx:27 ~ onSubmit ~ data:", data)
+        await submitOrder({ paymentData, cart })
+        toast.success("Tu pedido ha sido enviado, en breve nos pondremos en contacto contigo.")
+        dispatch(clearCart())
+        router.push(`/`)
       } catch (error) {
         const unknownError = "Algo salió mal, por favor intentalo de nuevo."
         toast.error(unknownError)
