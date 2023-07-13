@@ -2,7 +2,7 @@ import { z } from "zod"
 import { CheckoutInputs, PaymentMethod } from "../../models"
 
 export const checkoutInputsSchema: z.Schema<CheckoutInputs> = z.object({
-  name: z.string().nonempty('Este campo es requerido.'),
+  fullName: z.string().nonempty('Este campo es requerido.'),
   telephone: z.string().nonempty('Este campo es requerido.').regex(/^(\+\d{1,3})?\d{7,15}$/, 'Teléfono inválido.'),
   city: z.string().nonempty('Este campo es requerido.'),
   state: z.string().nonempty('Este campo es requerido.'),

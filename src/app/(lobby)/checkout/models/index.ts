@@ -1,5 +1,7 @@
+import { ProductCart } from "@/models"
+
 interface CheckoutData {
-  name: string
+  fullName: string
   telephone: string
   city: string
   state: string
@@ -11,9 +13,18 @@ interface CheckoutData {
   paymentMethod: PaymentMethod
   transferReference: string
 }
-export enum PaymentMethod  {
+export enum PaymentMethod {
   TRANSFER = 'Transferencia bancaria',
 }
 
 
 export type CheckoutInputs = CheckoutData
+
+export type Orders = {
+  paymentData: CheckoutInputs
+  products: Array<Omit<ProductCart, "images"> & { file: string }>
+  amountAll: number
+  subTotalPrice: number
+  toalPrice: number
+  createAt: Date
+}

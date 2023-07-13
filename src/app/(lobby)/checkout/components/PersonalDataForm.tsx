@@ -13,7 +13,7 @@ export default function PersonalDataForm({ form }: PersonalDataFormProps) {
     <div className='flex flex-col gap-4'>
       <FormField
         control={form.control}
-        name="name"
+        name="fullName"
         render={({ field }) => (
           <FormItem>
             <FormLabel required>Nombre completo (nombre y apellido)</FormLabel>
