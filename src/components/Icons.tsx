@@ -1,6 +1,7 @@
 import {
   Check,
   ChevronDown,
+  ChevronLeft,
   ExternalLink,
   Eye,
   EyeOff,
@@ -15,6 +16,7 @@ import {
   Trash,
   User2,
   X,
+  BaggageClaim,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -38,6 +40,8 @@ export const Icons = {
   settings: Settings,
   terminal: FileTerminal,
   externalLink: ExternalLink,
+  chevronLeft: ChevronLeft,
+  orders: BaggageClaim,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
