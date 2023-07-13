@@ -7,16 +7,6 @@ export type DashboardConfig = {
 }
 
 export const dashboardConfig: DashboardConfig = {
-  [UserRole.USER]: {
-    sidebarNav: [
-      {
-        title: "Cuenta",
-        href: "/dashboard/account",
-        icon: "user",
-        items: [],
-      },
-    ],
-  },
   [UserRole.ADMIN]: {
     sidebarNav: [
       {
