@@ -33,11 +33,17 @@ export const cartSlice = createSlice({
       state.subTotal -= action.payload.price
       state.amountAll -= 1
       saveCartToLocalStorage({ ...state })
+    },
+    clearCart: (state) => {
+      state.items = []
+      state.subTotal = 0
+      state.amountAll = 0
+      saveCartToLocalStorage({ ...state })
     }
   }
 })
 
-export const { addToCart, removeToCart } = cartSlice.actions
+export const { addToCart, removeToCart, clearCart } = cartSlice.actions
 export const selectCart = (state: RootState) => state.cart
 
 export default cartSlice.reducer;
