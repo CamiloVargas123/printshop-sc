@@ -8,7 +8,7 @@ import { clearCart } from '@/redux/slices/cart'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import PaymentForm from './components/PaymentForm'
 import PersonalDataForm from './components/PersonalDataForm'
@@ -42,7 +42,9 @@ export default function CheckoutPage() {
       try {
         await submitOrder({ paymentData, cart })
         toast.success("Tu pedido ha sido enviado, en breve nos pondremos en contacto contigo.")
-        dispatch(clearCart())
+        setTimeout(() => {
+          dispatch(clearCart())
+        }, 1000)
         router.push(`/`)
       } catch (error) {
         const unknownError = "Algo salió mal, por favor intentalo de nuevo."
