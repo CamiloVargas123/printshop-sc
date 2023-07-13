@@ -101,7 +101,7 @@ export default function PaymentForm({ isPending, form }: PaymentFormProps) {
                         name="transferReference"
                         render={({ field }) => (
                           <FormItem className="col-span-full">
-                            <FormLabel required>Referencia Bancaria</FormLabel>
+                            <FormLabel required>Referencia de pago</FormLabel>
                             <FormControl>
                               <Input {...field} />
                             </FormControl>

@@ -1,9 +1,9 @@
 import { Icons } from "@/components/Icons";
 import { formatPrice } from "@/lib/utils";
 import { ProductCart } from "@/models";
-import { Separator } from "@radix-ui/react-separator";
 import Image from "next/image";
 import { Fragment } from "react";
+import { Separator } from "@/components/ui/Separator";
 
 interface ItemCartProps {
   item: ProductCart

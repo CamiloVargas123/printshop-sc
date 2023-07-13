@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/Input"
 import { PasswordInput } from "@/components/ui/PasswordInput"
 import { authSchema } from "@/lib/validations/auth"
-import { isClerkAPIResponseError, useSignIn, useUser } from "@clerk/nextjs"
+import { isClerkAPIResponseError, useSignIn } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
