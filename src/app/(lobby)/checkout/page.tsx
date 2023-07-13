@@ -63,11 +63,11 @@ export default function CheckoutPage() {
           className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-6"
           onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
         >
-          <Shell className='lg:pt-0'>
+          <Shell className='py-0 md:py-0'>
             <h3 className="text-2xl font-medium text-muted-foreground line-clamp-1 text-center">Datos de envió</h3>
             <PersonalDataForm form={form} />
           </Shell>
-          <Shell className='relative items-start auto-rows-min lg:pt-0'>
+          <Shell className='relative items-start auto-rows-min py-0 md:py-0'>
             <Separator orientation="vertical" className="hidden lg:block absolute -left-2 top-0 lg:-left-3" />
             <Separator orientation="horizontal" className="block lg:hidden absolute left-0 -top-3" />
             <h3 className="text-2xl font-medium text-muted-foreground text-center">Tu pedido</h3>

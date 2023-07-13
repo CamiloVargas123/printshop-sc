@@ -23,7 +23,7 @@ export default function ResetPasswordStep2Page() {
   if (userId) return redirect("/")
 
   return (
-    <Shell layout="auth">
+    <Shell variant={"centered"}>
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Restablecer contraseña</CardTitle>

@@ -11,7 +11,7 @@ export default async function SingUpPage() {
   if (userId) return redirect("/")
 
   return (
-    <Shell layout="auth">
+    <Shell variant={"centered"}>
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Registrarse</CardTitle>

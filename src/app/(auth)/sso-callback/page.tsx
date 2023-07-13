@@ -11,7 +11,7 @@ export interface SSOCallbackPageProps {
 
 export default function SSOCallbackPage({ searchParams }: SSOCallbackPageProps) {
   return (
-    <Shell layout="auth">
+    <Shell variant={"centered"}>
       <SSOCallback searchParams={searchParams} />
     </Shell>
   )
