@@ -1,5 +1,5 @@
+import { CheckoutInputs, PaymentMethod } from "@/models"
 import { z } from "zod"
-import { CheckoutInputs, PaymentMethod } from "../../models"
 
 export const checkoutInputsSchema: z.Schema<CheckoutInputs> = z.object({
   fullName: z.string().nonempty('Este campo es requerido.'),

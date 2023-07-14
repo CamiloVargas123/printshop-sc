@@ -1,9 +1,9 @@
 'use server'
 import { IVA } from "@/lib/utils";
+import { CheckoutInputs, Orders } from "@/models";
 import { RootState } from "@/redux/store";
 import { db } from "@/server/config";
 import { addDoc, collection } from "firebase/firestore";
-import { CheckoutInputs, Orders } from "../models";
 
 interface SubmitOrder {
   paymentData: CheckoutInputs

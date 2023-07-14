@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Separator } from "@/components/ui/Separator";
 import { IVA, formatPrice } from "@/lib/utils";
+import { type CheckoutInputs, PaymentMethod } from "@/models";
 import { useAppSelector } from "@/redux/hooks";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import Link from "next/link";
 import { Fragment } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { CheckoutInputs, PaymentMethod } from "../models";
 
 const PaymentMethodInfo: Record<PaymentMethod, React.ReactNode> = {
   [PaymentMethod.TRANSFER]: <p className="text-sm text-muted-foreground col-span-full flex gap-1 flex-wrap">Paga por transferencia bancaria, <Link href="/how-to-pay" className="underline text-blue-500 hover:text-violet-500 flex gap-1 items-center line-clamp-1" target="_blank">¿Como pagar?<Icons.externalLink className="w-4 h-4" /></Link></p>,
