@@ -3,6 +3,7 @@ import { IVA } from "@/lib/utils";
 import { CheckoutInputs, Orders } from "@/models";
 import { RootState } from "@/redux/store";
 import { db } from "@/server/config";
+import dayjs from "dayjs";
 import { addDoc, collection } from "firebase/firestore";
 import { nanoid } from "nanoid";
 
@@ -24,9 +25,8 @@ export async function submitOrder({ paymentData, cart }: SubmitOrder) {
     })),
     amountAll: cart.amountAll,
     subTotalPrice: cart.subTotal,
-    toalPrice: cart.subTotal * IVA,
-    createAt: new Date()
+    totalPrice: cart.subTotal * IVA,
+    createdAt: dayjs().toDate(),
   }
-
   await addDoc(collection(db, "orders"), order);
 }

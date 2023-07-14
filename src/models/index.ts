@@ -1,4 +1,5 @@
 import { Icons } from "@/components/Icons"
+import { Timestamp } from "firebase/firestore"
 
 export enum UserRole {
   USER = "user",
@@ -91,6 +92,6 @@ export type Orders = {
   products: Array<Omit<ProductCart, "images"> & { file: string }>
   amountAll: number
   subTotalPrice: number
-  toalPrice: number
-  createAt: Date
+  totalPrice: number
+  createdAt: Date
 }

@@ -8,6 +8,9 @@ import { ReduxProvider } from '@/redux/ReduxProvider'
 import '@/style/globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Metadata } from 'next'
+import dayjs from 'dayjs'
+import "dayjs/locale/es";
+dayjs.locale("es");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
