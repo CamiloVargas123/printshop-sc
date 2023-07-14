@@ -40,12 +40,13 @@ export default function CheckoutPage() {
     if (cart.items.length === 0) return
     startTransition(async () => {
       try {
-        await submitOrder({ paymentData, cart })
-        toast.success("Tu pedido ha sido enviado, en breve nos pondremos en contacto contigo.")
-        setTimeout(() => {
-          dispatch(clearCart())
-        }, 1000)
-        router.push(`/`)
+        await submitOrder({ paymentData, cart }).then(() => {
+          toast.success("Tu pedido ha sido enviado, en breve nos pondremos en contacto contigo.")
+          setTimeout(() => {
+            dispatch(clearCart())
+          }, 1000)
+          router.push(`/`)
+        })
       } catch (error) {
         const unknownError = "Algo salió mal, por favor intentalo de nuevo."
         toast.error(unknownError)
