@@ -4,6 +4,7 @@ import { CheckoutInputs, Orders } from "@/models";
 import { RootState } from "@/redux/store";
 import { db } from "@/server/config";
 import { addDoc, collection } from "firebase/firestore";
+import { nanoid } from "nanoid";
 
 interface SubmitOrder {
   paymentData: CheckoutInputs
@@ -11,6 +12,7 @@ interface SubmitOrder {
 }
 export async function submitOrder({ paymentData, cart }: SubmitOrder) {
   const order: Orders = {
+    id: nanoid(),
     paymentData,
     products: cart.items.map((item, idx) => ({
       id: item.id,

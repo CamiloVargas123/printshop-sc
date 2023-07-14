@@ -86,6 +86,7 @@ export enum PaymentMethod {
 export type CheckoutInputs = CheckoutData
 
 export type Orders = {
+  id: string
   paymentData: CheckoutInputs
   products: Array<Omit<ProductCart, "images"> & { file: string }>
   amountAll: number
