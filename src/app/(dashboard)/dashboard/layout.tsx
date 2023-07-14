@@ -22,18 +22,18 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
   const sidebarNav = dashboardConfig[user.privateMetadata.role as UserRole].sidebarNav
   const pathNamesAccess = sidebarNav.map((item) => item.href)
 
-  if(!pathNamesAccess.includes(pathName)) redirect("/unauthorized")
+  if (!pathNamesAccess.includes(pathName)) redirect("/unauthorized")
 
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader user={user} />
-      <div className="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r md:sticky md:block">
-          <ScrollArea className="py-6 pr-6 lg:py-8">
+      <div className="container flex-1 items-start lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-8">
+        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem-1px)] w-full shrink-0 overflow-y-auto border-r lg:sticky lg:block">
+          <ScrollArea className="py-8">
             <SidebarNav items={sidebarNav} />
           </ScrollArea>
         </aside>
-        <main className="flex w-full flex-col overflow-hidden py-6 md:py-8">{children}</main>
+        <main className="flex w-full flex-col overflow-hidden py-8">{children}</main>
       </div>
     </div>
   )
