@@ -1,5 +1,4 @@
 import { Icons } from "@/components/Icons"
-import { Timestamp } from "firebase/firestore"
 
 export enum UserRole {
   USER = "user",

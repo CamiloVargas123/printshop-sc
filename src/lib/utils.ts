@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import dayjs from "dayjs";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -25,6 +26,11 @@ export function formatPrice(price: number | string) {
     style: "currency",
     currency: "EUR",
   }).format(Number(price))
+}
+
+export function formatDate(date: Date | string | undefined) {
+  if (!date) return "NaN"
+  return dayjs(date).format("D MMMM, YYYY HH:mm:ss")
 }
 
 export const IVA = 1.21
