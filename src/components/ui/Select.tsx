@@ -10,17 +10,15 @@ const SelectGroup = Group
 
 const SelectValue = Value
 
-const SelectTrigger = forwardRef<
+const SelectTriggerDefault = forwardRef<
   React.ElementRef<typeof Trigger>,
   React.ComponentPropsWithoutRef<typeof Trigger>
 >(({ className, children, ...props }, ref) => {
-  const { error } = useFormField()
   return (
     <Trigger
       ref={ref}
       className={cn(
         "flex h-10 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-        error && "border-destructive bg-destructive/20",
         className
       )}
       {...props}
@@ -32,7 +30,29 @@ const SelectTrigger = forwardRef<
     </Trigger>
   )
 })
+SelectTriggerDefault.displayName = "SelectTriggerDefault"
+
+const SelectTrigger = forwardRef<
+  React.ElementRef<typeof Trigger>,
+  React.ComponentPropsWithoutRef<typeof Trigger>
+>(({ className, ...props }, ref) => {
+  const { error } = useFormField()
+  return <SelectTriggerDefault
+    ref={ref}
+    className={cn(
+      className,
+      error && "border-destructive bg-destructive/20",
+    )} {...props} />
+})
 SelectTrigger.displayName = Trigger.displayName
+
+const SelectTriggerUncontrolled = forwardRef<
+  React.ElementRef<typeof Trigger>,
+  React.ComponentPropsWithoutRef<typeof Trigger>
+>(({ ...props }, ref) => {
+  return <SelectTriggerDefault ref={ref} {...props} />
+})
+SelectTriggerUncontrolled.displayName = "SelectTriggerUncontrolled"
 
 const SelectContent = forwardRef<
   React.ElementRef<typeof Content>,
@@ -111,6 +131,6 @@ const SelectSeparator = forwardRef<
 SelectSeparator.displayName = Separator.displayName
 
 export {
-  Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue
+  Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectTriggerUncontrolled, SelectValue
 }
 
