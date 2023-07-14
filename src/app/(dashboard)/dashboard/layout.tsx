@@ -33,7 +33,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
             <SidebarNav items={sidebarNav} />
           </ScrollArea>
         </aside>
-        <main className="flex w-full flex-col overflow-hidden">{children}</main>
+        <main className="flex w-full flex-col overflow-hidden py-6 md:py-8">{children}</main>
       </div>
     </div>
   )
