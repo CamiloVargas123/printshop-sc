@@ -1,6 +1,5 @@
 "use client"
 
-import { Icons } from "@/components/Icons"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -47,21 +46,29 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
                 {mainNavItems[0].title}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid items-center gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
+                <ul className="grid items-center gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
-                        aria-label="Home"
-                        className="flex h-full w-full select-none flex-col justify-end rounded-sm bg-gradient-to-b from-secondary/50 to-secondary p-6 no-underline outline-none focus:shadow-md"
+                        aria-label={siteConfig.name}
+                        className="flex gap-2 h-full w-full select-none flex-col justify-end items-center rounded-sm bg-gradient-to-b from-secondary/30 to-secondary/70 p-6 no-underline outline-none focus:shadow-md"
                         href="/"
                       >
-                        <Icons.logo className="h-6 w-6" aria-hidden="true" />
-                        <div className="mb-2 mt-4 text-lg font-medium">
+                        <Image
+                          src="/images/brand/BIG-SAFE-LOGO.webp"
+                          alt="BIG-SAFE-LOGO"
+                          aria-label="BIG-SAFE-LOGO"
+                          width={50}
+                          height={50}
+                          className="object-none"
+                          priority
+                        />
+                        <h1 className="text-lg font-medium text-center">
                           {siteConfig.name}
-                        </div>
-                        <p className="text-sm leading-tight text-muted-foreground">
+                        </h1>
+                        <h2 className="text-sm leading-tight text-secondary-foreground">
                           {siteConfig.description}
-                        </p>
+                        </h2>
                       </Link>
                     </NavigationMenuLink>
                   </li>
