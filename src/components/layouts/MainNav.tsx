@@ -13,6 +13,7 @@ import {
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { MainNavItem } from "@/models"
+import Image from "next/image"
 import Link from "next/link"
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react"
 
@@ -28,10 +29,15 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
         href="/"
         className="hidden items-center space-x-2 lg:flex flex-nowrap"
       >
-        <Icons.logo className="h-6 w-6" aria-hidden="true" />
-        <span className="hidden font-bold lg:inline-block">
-          {siteConfig.name}
-        </span>
+        <Image
+          src="/images/brand/BIG-SAFE-LOGO.webp"
+          alt="BIG-SAFE-LOGO"
+          aria-label="BIG-SAFE-LOGO"
+          width={50}
+          height={50}
+          className="object-none"
+          priority
+        />
       </Link>
       <NavigationMenu>
         <NavigationMenuList>

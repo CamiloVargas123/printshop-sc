@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/Sheet'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 import { MainNavItem } from '@/models'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from "next/navigation"
 import { useState } from 'react'
@@ -28,7 +29,7 @@ export default function MobileNav({ mainNavItems }: MobileNavProps) {
           className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
         >
           <Icons.menu className="h-6 w-6" />
-          <span className="sr-only">Toggle Menu</span>
+          <span className="sr-only">Alternar menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="pl-1 pr-0">
@@ -39,8 +40,15 @@ export default function MobileNav({ mainNavItems }: MobileNavProps) {
             className="flex items-center"
             onClick={() => setIsOpen(false)}
           >
-            <Icons.logo className="mr-2 h-4 w-4" aria-hidden="true" />
-            <span className="font-bold">{siteConfig.name}</span>
+            <Image
+              src="/images/brand/BIG-SAFE-LOGO.webp"
+              alt="BIG-SAFE-LOGO"
+              aria-label="BIG-SAFE-LOGO"
+              width={50}
+              height={50}
+              className="object-none"
+              priority
+            />
           </Link>
         </div>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
