@@ -189,7 +189,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-3 p-1">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} searchableColumns={searchableColumns} />
       <div className="rounded-sm border">
         <Table>
           <TableHeader>
