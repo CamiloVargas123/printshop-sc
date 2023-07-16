@@ -15,9 +15,10 @@ export async function submitOrder({ paymentData, cart }: SubmitOrder) {
   const order: Orders = {
     id: nanoid(),
     paymentData,
-    products: cart.items.map((item, idx) => ({
+    fullName: paymentData.fullName.toLowerCase(),
+    products: cart.items.map(item => ({
       id: item.id,
-      file: `test${idx}`,
+      file: "",
       metadata: item.metadata,
       price: item.price,
       slug: item.slug,
