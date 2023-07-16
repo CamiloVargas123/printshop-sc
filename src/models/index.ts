@@ -88,9 +88,14 @@ export type CheckoutInputs = CheckoutData
 export type Orders = {
   id: string
   paymentData: CheckoutInputs
+  fullName: string
   products: Array<Omit<ProductCart, "images"> & { file: string }>
   amountAll: number
   subTotalPrice: number
   totalPrice: number
   createdAt: Date
+}
+export interface DataTableSearchableColumn<TData> {
+  id: keyof TData
+  title: string
 }
