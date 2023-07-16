@@ -2,15 +2,16 @@ import { MainNavItem } from "@/models"
 
 import { productCategories } from "@/config/products"
 import { slugify } from "@/lib/utils"
+import { env } from "@/env.mjs"
 
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "printshop-sc",
+  name: "Big Safe, marketing & technologys",
   description:
-    "Servicios de impresión digital ofrece impresiones personalizadas de alta calidad para diversos productos promocionales y materiales publicitarios",
-  url: "http://localhost:3000/",
-  ogImage: "",
+    "Descubre cómo Big Safe puede mejorar tus estrategias de marketing y tecnología. ¡Aprovecha su potencial para impulsar tu negocio!",
+  url: env.NEXT_PUBLIC_APP_URL,
+  ogImage: `${env.NEXT_PUBLIC_APP_URL}/opengraph-image.png}`,
   mainNav: [
     {
       title: "Lobby",
@@ -47,8 +48,8 @@ export const siteConfig = {
       ],
     })),
   ] satisfies MainNavItem[],
-  links: {
+  /* links: {
     twitter: "https://twitter.com/",
     instagram: "https://instagram.com/",
-  },
+  }, */
 }

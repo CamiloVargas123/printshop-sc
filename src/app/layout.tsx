@@ -2,6 +2,7 @@ import { TailwindIndicator } from '@/components/TailwindIndicator'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Toaster } from '@/components/ui/Toaster'
 import { siteConfig } from '@/config/site'
+import { env } from '@/env.mjs'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import { ReduxProvider } from '@/redux/ReduxProvider'
@@ -25,17 +26,13 @@ export const metadata: Metadata = {
   keywords: [
     "imprenta",
     "imprenta online",
-    "imprenta online barata",
-    "imprenta online barata y de calidad",
-    "imprenta online barata y de calidad en españa",
     "marketing",
-    "marketing online",
     "marketing digital",
-    "marketing digital online",
-    "marketing digital online barato",
     "manejo de redes sociales",
-    "manejo de redes sociales online",
-    "manejo de redes sociales online barato",
+    "Campañas de publicidad en línea",
+    "Estrategias de marketing de contenido",
+    "Experiencia del usuario",
+    "Soluciones de marketing digital",
   ],
   authors: [
     {
@@ -60,12 +57,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
+    images: [`${env.NEXT_PUBLIC_APP_URL}/opengraph-image.png}`],
   },
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 }
 
