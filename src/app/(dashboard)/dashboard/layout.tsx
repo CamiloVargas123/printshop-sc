@@ -2,9 +2,9 @@ import SiteHeader from "@/components/layouts/SiteHeader"
 import { ScrollArea } from "@/components/ui/ScrollArea"
 import { UserRole } from "@/models"
 import { currentUser } from "@clerk/nextjs"
+import { headers } from "next/dist/client/components/headers"
 import { redirect } from "next/navigation"
 import SidebarNav from "../components/layout/SidebarNav"
-import { headers } from "next/dist/client/components/headers"
 import { dashboardConfig } from "../config/dashboard"
 
 interface DashboardLayoutProps {
@@ -22,7 +22,10 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
   const sidebarNav = dashboardConfig[user.privateMetadata.role as UserRole].sidebarNav
   const pathNamesAccess = sidebarNav.map((item) => item.href)
 
-  if (!pathNamesAccess.includes(pathName)) redirect("/unauthorized")
+  if (!pathNamesAccess.some(regex => {
+    const regexPath = new RegExp(regex ?? "")
+    return regexPath.test(pathName)
+  })) redirect("/unauthorized")
 
   return (
     <div className="flex min-h-screen flex-col">
