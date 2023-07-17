@@ -4,7 +4,7 @@ import { CheckoutInputs, Orders } from "@/models";
 import { RootState } from "@/redux/store";
 import { db } from "@/server/config";
 import dayjs from "dayjs";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { nanoid } from "nanoid";
 
 interface SubmitOrder {
@@ -12,8 +12,9 @@ interface SubmitOrder {
   cart: RootState["cart"]
 }
 export async function submitOrder({ paymentData, cart }: SubmitOrder) {
+  const documentRef = doc(db, "orders", nanoid());
   const order: Orders = {
-    id: nanoid(),
+    id: documentRef.id,
     paymentData,
     fullName: paymentData.fullName.toLowerCase(),
     products: cart.items.map(item => ({
@@ -29,5 +30,5 @@ export async function submitOrder({ paymentData, cart }: SubmitOrder) {
     totalPrice: cart.subTotal * IVA,
     createdAt: dayjs().toDate(),
   }
-  await addDoc(collection(db, "orders"), order);
+  await setDoc(documentRef, order);
 }
