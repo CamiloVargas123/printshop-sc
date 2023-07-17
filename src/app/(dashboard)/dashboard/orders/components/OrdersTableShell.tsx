@@ -14,6 +14,7 @@ import {
 import { formatDate, formatPrice, includeStringIntoOtherString } from "@/lib/utils"
 import { Orders } from "@/models"
 import { type ColumnDef } from "@tanstack/react-table"
+import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { toast } from "sonner"
@@ -148,14 +149,17 @@ export function OrdersTableShell({
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[150px]">
                 <DropdownMenuItem
-                  disabled
-                  onClick={() => console.log("ver order", order.id)}
+                  asChild
                 >
-                  <Icons.view
-                    className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-                    aria-hidden="true"
-                  />
-                  Ver
+                  <Link
+                    href={`/dashboard/orders/${order.id}`}
+                  >
+                    <Icons.view
+                      className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+                      aria-hidden="true"
+                    />
+                    Ver
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   disabled
