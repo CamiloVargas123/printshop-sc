@@ -35,3 +35,10 @@ export function formatDate(date: Date | string | undefined) {
 }
 
 export const IVA = 1.21
+
+export function includeStringIntoOtherString(str1: string, str2: string) {
+  const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const normalizedStr1 = normalize(str1);
+  const normalizedStr2 = normalize(str2);
+  return normalizedStr1.includes(normalizedStr2);
+}

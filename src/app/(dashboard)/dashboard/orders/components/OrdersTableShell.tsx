@@ -11,11 +11,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu"
-import { formatDate, formatPrice } from "@/lib/utils"
+import { formatDate, formatPrice, includeStringIntoOtherString } from "@/lib/utils"
 import { Orders } from "@/models"
 import { type ColumnDef } from "@tanstack/react-table"
 import { useSearchParams } from "next/navigation"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { toast } from "sonner"
 import { deleteOrder } from "../services"
 
@@ -23,19 +23,45 @@ interface OrdersTableShellProps {
   data: Orders[]
   pageCount: number
 }
-function compararStrings(str1: string, str2: string) {
-  const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  const normalizedStr1 = normalize(str1);
-  const normalizedStr2 = normalize(str2);
-  return normalizedStr1.includes(normalizedStr2);
+
+function paginatioData({ data, offset, limit }: { data: Orders[], offset: number, limit: number }): { orders: Orders[], pageCount: number } {
+  return { orders: data.slice(offset, offset + limit), pageCount: Math.ceil(data.length / limit) }
 }
-interface Params {
-  page: string
-  perPage: string
-  fullName: string | null
-  column: string
-  order: string
+
+function sortedOrders({ data, column, order }: { data: Orders[], column: string, order: string }): Orders[] {
+  if (column === "createdAt") {
+    if (order === "asc") {
+      return data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    }
+    return data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  }
+  if (column === "amountAll") {
+    if (order === "asc") {
+      return data.sort((a, b) => a.amountAll - b.amountAll)
+    }
+    return data.sort((a, b) => b.amountAll - a.amountAll)
+  }
+  if (column === "totalPrice") {
+    if (order === "asc") {
+      return data.sort((a, b) => a.totalPrice - b.totalPrice)
+    }
+    return data.sort((a, b) => b.totalPrice - a.totalPrice)
+  }
+  if (column === "fullName") {
+    if (order === "asc") {
+      return data.sort((a, b) => a.paymentData.fullName.localeCompare(b.paymentData.fullName))
+    }
+    return data.sort((a, b) => b.paymentData.fullName.localeCompare(a.paymentData.fullName))
+  }
+  return data.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
 }
+
+function filteredOrders({ data, fullName }: { data: Orders[], fullName: string | null }) {
+  return fullName !== null && fullName.length > 0
+    ? data.filter((order) => includeStringIntoOtherString(order.paymentData.fullName, fullName))
+    : data
+}
+
 export function OrdersTableShell({
   data,
   pageCount,
@@ -47,71 +73,21 @@ export function OrdersTableShell({
   const fullName = searchParams?.get("fullName")
   const [column, order] = sort?.split(".") ?? []
 
-  const limit = typeof perPage === "string" ? parseInt(perPage) : 5
+  const limit = useMemo(() => Number(perPage), [perPage])
+  const offset = useMemo(() => (Number(page) - 1) * limit, [page, limit])
+  const originalData = useRef<Orders[]>(data)
 
   const [filteredData, setFilteredData] = useState<{ orders: Orders[], pageCount: number }>({
-    orders: data,
-    pageCount: Math.ceil(data.length / limit)
+    orders: originalData.current,
+    pageCount: Math.ceil(originalData.current.length / limit)
   })
-  useEffect(() => {
-    const params: Params = {
-      page,
-      perPage,
-      fullName,
-      column,
-      order,
-    }
-    setFilteredData(filter(params))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
-  const savedData = useMemo(() => data, [data])
 
   // this filter should be made in the backend, but NoSql databases are not good for this kind of query
-  const filter = useCallback((params: Params): { orders: Orders[], pageCount: number } => {
-    const offset = typeof params.page === "string"
-      ? parseInt(params.page) > 0
-        ? (parseInt(params.page) - 1) * limit
-        : 0
-      : 0
-    const temFiltered: Orders[] = []
+  useEffect(() => {
+    const result = paginatioData({ data: sortedOrders({ column, order, data: filteredOrders({ data: originalData.current, fullName: fullName }) }), offset, limit })
+    setFilteredData({ orders: result.orders, pageCount: result.pageCount })
+  }, [fullName, column, order, limit, offset])
 
-    if (params.fullName) {
-      data.map((order) => {
-        if (params.fullName && compararStrings(order.paymentData.fullName, params.fullName)) {
-          temFiltered.push(order)
-        }
-      })
-    }
-    if (!params.fullName) temFiltered.push(...savedData)
-    const sorted = temFiltered.sort((a, b) => {
-      if (params.column === "createdAt" || !params.column) {
-        if (params.order === "asc" || !params.column) {
-          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-        }
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      }
-      if (params.column === "amountAll") {
-        if (params.order === "asc") {
-          return a.amountAll - b.amountAll
-        }
-        return b.amountAll - a.amountAll
-      }
-      if (params.column === "totalPrice") {
-        if (params.order === "asc") {
-          return a.totalPrice - b.totalPrice
-        }
-        return b.totalPrice - a.totalPrice
-      }
-      if (params.column === "fullName") {
-        if (params.order === "asc") {
-          return a.paymentData.fullName.localeCompare(b.paymentData.fullName)
-        }
-        return b.paymentData.fullName.localeCompare(a.paymentData.fullName)
-      }
-      return 0
-    })
-    return { orders: sorted.slice(offset).filter((_, index) => index < limit), pageCount: Math.ceil(temFiltered.length / limit) }
-  }, [data, savedData, limit])
 
   // Memoize the columns so they don't re-render on every render
   const columns = useMemo<ColumnDef<Orders, unknown>[]>(
