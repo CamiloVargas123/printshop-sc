@@ -89,7 +89,7 @@ export type Orders = {
   id: string
   paymentData: CheckoutInputs
   fullName: string
-  products: Array<Omit<ProductCart, "images"> & { file: string }>
+  products: Array<ProductCart & { file: string }>
   amountAll: number
   subTotalPrice: number
   totalPrice: number
