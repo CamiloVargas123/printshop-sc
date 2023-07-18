@@ -19,13 +19,10 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
   if (!user?.privateMetadata.role || !pathName) {
     redirect("/")
   }
-  const sidebarNav = dashboardConfig[user.privateMetadata.role as UserRole].sidebarNav
-  const pathNamesAccess = sidebarNav.map((item) => item.href)
-
-  if (!pathNamesAccess.some(regex => {
-    const regexPath = new RegExp(regex ?? "")
-    return regexPath.test(pathName)
-  })) redirect("/unauthorized")
+  const sidebarNav = dashboardConfig[user.privateMetadata.role as UserRole]?.sidebarNav
+  if (!sidebarNav) redirect("/unauthorized")
+  const pathNamesAccess = sidebarNav.map((item) => item.regex)
+  if (!pathNamesAccess.some(regex => regex.test(pathName))) redirect("/unauthorized")
 
   return (
     <div className="flex min-h-screen flex-col">

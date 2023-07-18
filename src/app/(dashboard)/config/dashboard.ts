@@ -1,8 +1,11 @@
 import { UserRole, type SidebarNavItem } from "@/models"
 
+interface SidebarNavItemWithRegex extends SidebarNavItem {
+  regex: RegExp
+}
 export type DashboardConfig = {
   [key: string]: {
-    sidebarNav: SidebarNavItem[]
+    sidebarNav: SidebarNavItemWithRegex[]
   }
 }
 
@@ -11,7 +14,8 @@ export const dashboardConfig: DashboardConfig = {
     sidebarNav: [
       {
         title: "Pedidos",
-        href: "/dashboard/orders(.*)",
+        href: "/dashboard/orders",
+        regex: /^\/dashboard\/orders(.*)/,
         icon: "orders",
         items: [],
       },
