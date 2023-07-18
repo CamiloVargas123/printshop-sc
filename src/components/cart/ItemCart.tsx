@@ -12,7 +12,7 @@ interface ItemCartProps {
 
 export default function ItemCart({ item, children }: ItemCartProps) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 min-w-min">
       <div className="flex items-center space-x-4">
         <div className="relative h-16 w-16 overflow-hidden rounded">
           {item.images.length ? (
@@ -35,7 +35,7 @@ export default function ItemCart({ item, children }: ItemCartProps) {
             </div>
           )}
         </div>
-        <div className="grid grid-cols-[155px_1fr] text-sm flex-1">
+        <div className="grid grid-cols-[155px_minmax(100px,1fr)] text-sm flex-1">
           <span className="line-clamp-1 font-semibold col-span-2">{item.title}</span>
           <span className="line-clamp-1">Precio:</span>
           <span className="line-clamp-1 text-muted-foreground">{formatPrice(item.price)}</span>
