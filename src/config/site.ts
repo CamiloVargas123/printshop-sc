@@ -7,9 +7,9 @@ import { env } from "@/env.mjs"
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Big Safe, marketing & technologys",
+  name: "Big Safe",
   description:
-    "Descubre cómo Big Safe puede mejorar tus estrategias de marketing y tecnología. ¡Aprovecha su potencial para impulsar tu negocio!",
+    "Descubre cómo Big Safe, marketing & technologys puede mejorar tus estrategias de marketing y tecnología. ¡Aprovecha su potencial para impulsar tu negocio!",
   url: env.NEXT_PUBLIC_APP_URL,
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/opengraph-image.png}`,
   mainNav: [
