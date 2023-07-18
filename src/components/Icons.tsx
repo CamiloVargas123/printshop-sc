@@ -28,6 +28,7 @@ import {
   ArrowDown,
   ArrowUp,
   X,
+  Download,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -64,6 +65,7 @@ export const Icons = {
   arrowDownFromLine: ArrowDownFromLine,
   arrowDown: ArrowDown,
   arrowUp: ArrowUp,
+  download: Download,
   google: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
