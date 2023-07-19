@@ -1,5 +1,6 @@
 'use client'
 
+import { SidebarNavItemWithRegex } from '@/app/(dashboard)/config/dashboard'
 import { Icons } from '@/components/Icons'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/Accordion'
 import { Button } from '@/components/ui/Button'
@@ -14,9 +15,10 @@ import { useState } from 'react'
 
 interface MobileNavProps {
   mainNavItems?: MainNavItem[]
+  sidebarNavItems?: SidebarNavItemWithRegex[]
 }
 
-export default function MobileNav({ mainNavItems }: MobileNavProps) {
+export default function MobileNav({ mainNavItems, sidebarNavItems }: MobileNavProps) {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -84,6 +86,38 @@ export default function MobileNav({ mainNavItems }: MobileNavProps) {
                   </AccordionContent>
                 </AccordionItem>
               ))}
+              {
+                sidebarNavItems &&
+                <AccordionItem value="sidebar">
+                  <AccordionTrigger className="text-sm">
+                    Sidebar Menu
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col space-y-2">
+                      {sidebarNavItems.map((item, index) =>
+                        item.href ? (
+                          <MobileLink
+                            key={index}
+                            href={String(item.href)}
+                            pathname={pathname}
+                            setIsOpen={setIsOpen}
+                            disabled={item.disabled}
+                          >
+                            {item.title}
+                          </MobileLink>
+                        ) : (
+                          <div
+                            key={index}
+                            className="text-foreground/70 transition-colors"
+                          >
+                            {item.title}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              }
             </Accordion>
           </div>
         </ScrollArea>

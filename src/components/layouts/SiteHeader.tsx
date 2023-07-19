@@ -10,6 +10,7 @@ import type { User } from '@clerk/nextjs/dist/types/server'
 import Link from 'next/link'
 import MainNav from './MainNav'
 import MobileNav from './MobileNav'
+import { dashboardConfig } from '@/app/(dashboard)/config/dashboard'
 
 interface SiteHeaderProps {
   user: User | null
@@ -22,7 +23,7 @@ export default function SiteHeader({ user }: SiteHeaderProps) {
     <header className="sticky top-0 z-40 w-full border-b bg-background border-border">
       <div className="container flex h-14 items-center">
         <MainNav mainNavItems={siteConfig.mainNav} />
-        <MobileNav mainNavItems={siteConfig.mainNav} />
+        <MobileNav mainNavItems={siteConfig.mainNav} sidebarNavItems={dashboardConfig[isAdmin ? UserRole.ADMIN : UserRole.USER]?.sidebarNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             <CartSheet />

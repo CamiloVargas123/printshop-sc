@@ -1,6 +1,6 @@
 import { UserRole, type SidebarNavItem } from "@/models"
 
-interface SidebarNavItemWithRegex extends SidebarNavItem {
+export interface SidebarNavItemWithRegex extends SidebarNavItem {
   regex: RegExp
 }
 export type DashboardConfig = {
