@@ -27,7 +27,7 @@ export default function ItemCart({ item, children }: ItemCartProps) {
               loading="lazy"
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-secondary">
+            <div className="flex h-full items-center justify-center bg-muted">
               <Icons.placeholder
                 className="h-4 w-4"
                 aria-hidden="true"

@@ -23,7 +23,7 @@ export default function ProductPage({ params }: { params: { category: string, pr
               loading="lazy"
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-secondary rounded-sm">
+            <div className="flex h-full items-center justify-center bg-muted rounded-sm">
               <Icons.placeholder
                 className="h-9 w-9 text-muted-foreground"
                 aria-hidden="true"
