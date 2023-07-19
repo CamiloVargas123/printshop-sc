@@ -79,17 +79,21 @@ interface CheckoutData {
   paymentMethod: PaymentMethod
   transferReference: string
 }
+interface CheckoutDataWithFiles extends CheckoutData {
+  files: Array<{ idProduct: string, file: File } | undefined> | undefined
+}
+
 export enum PaymentMethod {
   TRANSFER = 'Transferencia bancaria',
 }
 
-export type CheckoutInputs = CheckoutData
+export type CheckoutInputs = CheckoutDataWithFiles
 
 export type Orders = {
   id: string
-  paymentData: CheckoutInputs
+  paymentData: CheckoutData
   fullName: string
-  products: Array<ProductCart & { file: string }>
+  products: Array<ProductCart & { file?: string }>
   amountAll: number
   subTotalPrice: number
   totalPrice: number
