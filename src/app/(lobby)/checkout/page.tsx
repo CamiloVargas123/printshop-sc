@@ -7,6 +7,7 @@ import { PaymentMethod, type CheckoutInputs } from '@/models'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { clearCart } from '@/redux/slices/cart'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { nanoid } from 'nanoid'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
@@ -14,7 +15,7 @@ import { toast } from 'sonner'
 import PaymentForm from './components/PaymentForm'
 import PersonalDataForm from './components/PersonalDataForm'
 import { checkoutInputsSchema } from './lib/validations/personalData'
-import { submitOrder } from './services'
+import { FilesUpload, submitOrder, uploadFile } from './services'
 
 export default function CheckoutPage() {
   const dispatch = useAppDispatch()
@@ -33,20 +34,36 @@ export default function CheckoutPage() {
       email: "",
       paymentMethod: PaymentMethod.TRANSFER,
       transferReference: "",
+      note: "",
+      addressOptional: "",
     },
   })
 
   function onSubmit(paymentData: CheckoutInputs) {
     if (cart.items.length === 0) return
+    paymentData.note === "" && (paymentData.note = undefined)
+    paymentData.addressOptional === "" && (paymentData.note = undefined)
     startTransition(async () => {
       try {
-        await submitOrder({ paymentData, cart }).then(() => {
-          toast.success("Tu pedido ha sido enviado, en breve nos pondremos en contacto contigo.")
+        const idOrder = nanoid()
+        const files: Array<FilesUpload> = []
+        if (paymentData.files) {
+          for (const file of paymentData.files) {
+            if (file) {
+              const uploadedFile = await uploadFile({ file: file.file, idOrder: idOrder, idProduct: file.idProduct });
+              files.push(uploadedFile);
+            }
+          }
+        }
+        paymentData.files = undefined
+        await submitOrder({ paymentData, cart, files, idOrder }).then(() => {
+          toast.success("Tu pedido ha sido enviado, en breve nos pondremos en contacto contigo.", { duration: 5000 })
+          dispatch(clearCart())
           setTimeout(() => {
-            dispatch(clearCart())
-          }, 1000)
-          router.push(`/`)
+            router.push(`/`)
+          }, 5000)
         })
+
       } catch (error) {
         const unknownError = "Algo salió mal, por favor intentalo de nuevo."
         toast.error(unknownError)
@@ -61,14 +78,14 @@ export default function CheckoutPage() {
       />
       <Form {...form}>
         <form
-          className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-6"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
         >
-          <Shell className='py-0 md:py-0'>
+          <Shell className='py-0 md:py-0 lg:px-4 xl:px-8'>
             <h3 className="text-2xl font-medium text-muted-foreground line-clamp-1 text-center">Datos de envió</h3>
             <PersonalDataForm form={form} />
           </Shell>
-          <Shell className='relative items-start auto-rows-min py-0 md:py-0'>
+          <Shell className='relative items-start auto-rows-min py-0 md:py-0 lg:px-4 xl:px-8'>
             <Separator orientation="vertical" className="hidden lg:block absolute -left-2 top-0 lg:-left-3" />
             <Separator orientation="horizontal" className="block lg:hidden absolute left-0 -top-3" />
             <h3 className="text-2xl font-medium text-muted-foreground text-center">Tu pedido</h3>
