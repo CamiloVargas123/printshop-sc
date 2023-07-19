@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/NavigationMenu"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { MainNavItem } from "@/models"
+import { MainNavItem, NavItemWithOptionalChildren } from "@/models"
 import Image from "next/image"
 import Link from "next/link"
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react"
@@ -72,13 +72,12 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                  {mainNavItems[0].items.map((item) => (
+                  {mainNavItems[0].items.map((subItem) => (
                     <ListItem
-                      key={item.title}
-                      title={item.title}
-                      href={item.href}
+                      key={subItem.title}
+                      {...subItem}
                     >
-                      {item.description}
+                      {subItem.description}
                     </ListItem>
                   ))}
                 </ul>
@@ -95,11 +94,10 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px] grid grid-cols-2">
-                      {item.items.map((item) => (
+                      {item.items.map((subItem) => (
                         <ListItem
-                          key={item.title}
-                          title={item.title}
-                          href={item.href}
+                          key={subItem.title}
+                          {...subItem}
                         />
                       ))}
                     </ul>
@@ -127,8 +125,10 @@ export default function MainNav({ mainNavItems }: MainNavProps) {
 
 const ListItem = forwardRef<
   ElementRef<"a">,
-  ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  ComponentPropsWithoutRef<"a"> &
+  NavItemWithOptionalChildren
+>(({ className, children, ...props }, ref) => {
+  const { title, disabled } = props
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -137,7 +137,8 @@ const ListItem = forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-sm p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
+            className,
+            disabled && "opacity-50 cursor-not-allowed pointer-events-none"
           )}
           {...props}
         >

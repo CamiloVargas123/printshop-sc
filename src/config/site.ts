@@ -1,8 +1,8 @@
 import { MainNavItem } from "@/models"
 
 import { productCategories } from "@/config/products"
-import { slugify } from "@/lib/utils"
 import { env } from "@/env.mjs"
+import { slugify } from "@/lib/utils"
 
 export type SiteConfig = typeof siteConfig
 
@@ -25,11 +25,13 @@ export const siteConfig = {
           title: "Contacto",
           href: "/contacto",
           description: "Contacta con nosotros",
+          disabled: true,
         },
         {
           title: "Blog",
           href: "/blog",
           description: "Blog de noticias y novedades",
+          disabled: true,
         },
       ],
     },

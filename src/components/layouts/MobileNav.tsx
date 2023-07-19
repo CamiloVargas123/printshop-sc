@@ -5,7 +5,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Button } from '@/components/ui/Button'
 import { ScrollArea } from '@/components/ui/ScrollArea'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/Sheet'
-import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 import { MainNavItem } from '@/models'
 import Image from 'next/image'
