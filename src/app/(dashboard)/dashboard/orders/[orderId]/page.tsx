@@ -61,10 +61,13 @@ export default async function OrderPage({ params }: { params: { orderId: string 
         {order.products.map(item => {
           return (
             <ItemCart key={item.id} item={item}>
-              <a href={item.file} download className={buttonVariants({ size: "icon", variant: "outline" })}>
-                <Icons.download className="w-5 h-5" />
-                <span className="sr-only">Descargar</span>
-              </a>
+              {
+                item.file &&
+                <a href={item.file} download className={buttonVariants({ size: "icon", variant: "outline" })}>
+                  <Icons.download className="w-5 h-5" />
+                  <span className="sr-only">Descargar</span>
+                </a>
+              }
             </ItemCart>
           )
         })}
